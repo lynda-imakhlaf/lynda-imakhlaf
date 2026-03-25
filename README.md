@@ -1,16 +1,68 @@
-## Hi there 👋
+<h1 align="center">Hi 👋, I'm Lynda Imakhlaf</h1>
+<h3 align="center">Full Stack Developer | Problem Solver</h3>
 
-<!--
-**lynda-imakhlaf/lynda-imakhlaf** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
+<p align="center">
+  <a href="mailto:imakhlflyndatiane@gmail.com">📧 Contact Me</a>
+</p>
 
-Here are some ideas to get you started:
+---
 
-- 🔭 I’m currently working on ...
-- 🌱 I’m currently learning ...
-- 👯 I’m looking to collaborate on ...
-- 🤔 I’m looking for help with ...
-- 💬 Ask me about ...
-- 📫 How to reach me: ...
-- 😄 Pronouns: ...
-- ⚡ Fun fact: ...
--->
+### 🚀 About Me
+
+- 💻 Full-stack developer specialized in **React & Django**
+- 🧠 Strong problem-solving mindset
+- ⚙️ I build scalable web applications from **scratch to production**
+- 🎮 Also experienced in **Unity & 3D (Blender)**
+- 📈 Focused on clean code, performance, and best practices
+- 🌱 Always learning and improving
+
+---
+
+### 🧰 Tech Stack
+
+**Frontend**
+- JavaScript / TypeScript
+- React
+- Vite
+- HTML5 / CSS3
+
+**Backend**
+- Python / Django
+- REST APIs
+- PostgreSQL
+
+**Programming Languages**
+- C#
+- Java
+- C / C++
+
+**Tools & Others**
+- Git
+- Postman
+- Docker
+- Figma
+- Unity
+- Blender
+
+---
+
+### 📊 GitHub Stats
+
+<p align="center">
+  <img src="https://github-readme-stats.vercel.app/api?username=YOUR_USERNAME&show_icons=true&theme=tokyonight" />
+  <img src="https://github-readme-streak-stats.herokuapp.com/?user=YOUR_USERNAME&theme=tokyonight" />
+</p>
+
+---
+
+### 🌐 Connect with me
+
+- 📧 Email: imakhlflyndatiane@gmail.com
+- 💼 LinkedIn: [Add your link]
+- 🌍 Portfolio: [Add your link]
+
+---
+
+### ⚡ Fun Fact
+
+I don’t just write code… I build solutions 🚀
