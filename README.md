@@ -51,7 +51,7 @@ Currently working full-time, still building on the side. **I don't just write co
 <!-- <img height="155em" src="https://github-readme-stats.vercel.app/api?username=lynda-imakhlaf&show_icons=true&hide_border=true&bg_color=0d0221&title_color=a855f7&icon_color=a855f7&text_color=c4b5fd&count_private=true&hide_rank=false"/>
 <img height="155em" src="https://github-readme-stats.vercel.app/api/top-langs/?username=lynda-imakhlaf&layout=compact&hide_border=true&bg_color=0d0221&title_color=a855f7&text_color=c4b5fd&langs_count=6"/> -->
 
-<img width="96%" src="https://streak-stats.demolab.com?user=lynda-imakhlaf&hide_border=true&background=0d0221&ring=a855f7&fire=6e00ff&currStreakLabel=c4b5fd&sideNums=c4b5fd&sideLabels=a855f7&dates=6e57f7&stroke=0d0221"/>
+<!-- <img width="96%" src="https://streak-stats.demolab.com?user=lynda-imakhlaf&hide_border=true&background=0d0221&ring=a855f7&fire=6e00ff&currStreakLabel=c4b5fd&sideNums=c4b5fd&sideLabels=a855f7&dates=6e57f7&stroke=0d0221"/> -->
 
 </div>
 
