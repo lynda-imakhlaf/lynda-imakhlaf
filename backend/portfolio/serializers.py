@@ -29,3 +29,6 @@ class ContactMessageSerializer(serializers.ModelSerializer):
         if len(value.strip()) < 10:
             raise serializers.ValidationError('Message must be at least 10 characters.')
         return value
+
+
+

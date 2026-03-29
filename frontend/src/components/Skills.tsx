@@ -1,34 +1,53 @@
+import { useEffect, useState } from 'react'
 import { useInView } from 'react-intersection-observer'
 import { useTheme } from '../ThemeContext'
+import { fetchSkills, type ApiSkill } from '../api'
 
-const BUBBLE_COLORS: Record<string, 'blue'|'green'|'orange'|'purple'|'pink'|'gold'> = {
-  React:'blue', Python:'green', Django:'green', Blender:'orange', Unity:'purple',
-  'Three.js':'blue', Docker:'blue', TypeScript:'blue', PostgreSQL:'purple',
-  Figma:'pink', 'C#':'purple', Git:'orange', MySQL:'green', Nginx:'green', Linux:'gold',
-}
+const FALLBACK_SKILLS: ApiSkill[] = [
+  {id:1,  name:'React',       category:'frontend', level:95, color:'#38BDF8', order:1},
+  {id:2,  name:'TypeScript',  category:'frontend', level:88, color:'#38BDF8', order:2},
+  {id:3,  name:'Three.js',    category:'frontend', level:80, color:'#38BDF8', order:3},
+  {id:4,  name:'JavaScript',  category:'frontend', level:95, color:'#38BDF8', order:4},
+  {id:5,  name:'Vite',        category:'frontend', level:85, color:'#38BDF8', order:5},
+  {id:6,  name:'Django / DRF',category:'backend',  level:92, color:'#4ADE80', order:1},
+  {id:7,  name:'Python',      category:'backend',  level:90, color:'#4ADE80', order:2},
+  {id:8,  name:'MySQL / PG',  category:'backend',  level:86, color:'#4ADE80', order:3},
+  {id:9,  name:'REST APIs',   category:'backend',  level:93, color:'#4ADE80', order:4},
+  {id:10, name:'Docker',      category:'backend',  level:78, color:'#4ADE80', order:5},
+  {id:11, name:'Blender',     category:'creative', level:85, color:'#FB923C', order:1},
+  {id:12, name:'Unity',       category:'creative', level:82, color:'#FB923C', order:2},
+  {id:13, name:'C#',          category:'creative', level:78, color:'#FB923C', order:3},
+  {id:14, name:'Animation',   category:'creative', level:80, color:'#FB923C', order:4},
+  {id:15, name:'C++',         category:'creative', level:70, color:'#FB923C', order:5},
+  {id:16, name:'Git / GitHub',category:'tools',    level:93, color:'#F472B6', order:1},
+  {id:17, name:'Figma',       category:'tools',    level:82, color:'#F472B6', order:2},
+  {id:18, name:'Postman',     category:'tools',    level:88, color:'#F472B6', order:3},
+  {id:19, name:'Linux',       category:'tools',    level:80, color:'#F472B6', order:4},
+  {id:20, name:'CI/CD',       category:'tools',    level:72, color:'#F472B6', order:5},
+]
 
 export default function Skills() {
   const { ref, inView } = useInView({ threshold: 0.08, triggerOnce: true })
   const { theme: t } = useTheme()
+  const [apiSkills, setApiSkills] = useState<ApiSkill[]>(FALLBACK_SKILLS)
+
+  useEffect(() => {
+    fetchSkills()
+      .then(data => { if (data.length) setApiSkills(data) })
+      .catch(() => { /* keep fallback */ })
+  }, [])
+
+  const byCategory = (cat: ApiSkill['category']) =>
+    apiSkills.filter(s => s.category === cat).map(s => ({ name: s.name, level: s.level }))
 
   const cats = [
-    { label:'Frontend', icon:'/papi.png', ...t.pairs.blue,
-      skills:[{name:'React',level:95},{name:'TypeScript',level:88},{name:'Three.js',level:80},{name:'JavaScript',level:95},{name:'Vite',level:85}],
-    },
-    { label:'Backend', icon:'/papi1.png', ...t.pairs.green,
-      skills:[{name:'Django / DRF',level:92},{name:'Python',level:90},{name:'MySQL / PG',level:86},{name:'REST APIs',level:93},{name:'Docker',level:78}],
-    },
-    { label:'Créatif', icon:'/papi2.png', ...t.pairs.orange,
-      skills:[{name:'Blender',level:85},{name:'Unity',level:82},{name:'C#',level:78},{name:'Animation',level:80},{name:'C++',level:70}],
-    },
-    { label:'Outils', icon:'/papi3.png', ...t.pairs.pink,
-      skills:[{name:'Git / GitHub',level:93},{name:'Figma',level:82},{name:'Postman',level:88},{name:'Linux',level:80},{name:'CI/CD',level:72}],
-    },
+    { label:'Frontend', icon:'/papi.png',  ...t.pairs.blue,   skills: byCategory('frontend') },
+    { label:'Backend',  icon:'/papi1.png', ...t.pairs.green,  skills: byCategory('backend')  },
+    { label:'Créatif',  icon:'/papi2.png', ...t.pairs.orange, skills: byCategory('creative') },
+    { label:'Outils',   icon:'/papi3.png', ...t.pairs.pink,   skills: byCategory('tools')    },
   ]
 
-  const bubbles = Object.entries(BUBBLE_COLORS).map(([name, key]) => ({
-    name, color: t.pairs[key].color,
-  }))
+  const bubbles = apiSkills.map(s => ({ name: s.name, color: s.color }))
 
   return (
     <section id="skills" ref={ref} style={{ padding:'100px 0', position:'relative', overflow:'hidden', background:'transparent' }}>

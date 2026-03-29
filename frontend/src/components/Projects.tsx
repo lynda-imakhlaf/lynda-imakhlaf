@@ -1,52 +1,68 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useInView } from 'react-intersection-observer'
 import { useTheme } from '../ThemeContext'
+import { fetchProjects, type ApiProject } from '../api'
 
 type Cat = 'all' | 'web' | '3d' | 'game'
+
+// Static enrichment not stored in DB (display-only)
+const ENRICHMENT: Record<string, { emoji: string; impact: string }> = {
+  'E-Commerce Platform':  { emoji: '🛒', impact: '10k+ produits'     },
+  'Système ERP':          { emoji: '📊', impact: '50+ utilisateurs'  },
+  'Jeu Unity 3D':         { emoji: '🎮', impact: 'Indie · Shipped'   },
+  '3D Product Viewer':    { emoji: '🦋', impact: 'Web · Interactive' },
+  'App Immobilière':      { emoji: '🏠', impact: 'Production · Live' },
+  'Pack Personnages 3D':  { emoji: '🎨', impact: '3D Assets'         },
+}
+
+const FALLBACK: ApiProject[] = [
+  { id:1, title:'E-Commerce Platform',  description:"Boutique complète avec React, Django, Stripe et gestion d'inventaire en temps réel.", category:'web',  tags:['React','Django','PostgreSQL','Stripe','Docker'], accent_color:'#A855F7', year:2024, is_featured:true,  order:1, thumbnail:null, demo_url:'', github_url:'' },
+  { id:2, title:'Système ERP',          description:'RH, inventaire, comptabilité, reporting. Architecture modulaire pour une entreprise de fabrication.',       category:'web',  tags:['React','Django','PostgreSQL','Charts.js'],         accent_color:'#38BDF8', year:2023, is_featured:true,  order:2, thumbnail:null, demo_url:'', github_url:'' },
+  { id:3, title:'Jeu Unity 3D',         description:'Monde immersif Unity avec personnages Blender, shaders custom et physique avancée.',                        category:'game', tags:['Unity','C#','Blender','Animation'],                accent_color:'#FB923C', year:2023, is_featured:true,  order:3, thumbnail:null, demo_url:'', github_url:'' },
+  { id:4, title:'3D Product Viewer',    description:'Visualiseur Three.js interactif : matériaux, éclairage HDR, rotations — dans le navigateur.',              category:'3d',   tags:['Three.js','React','WebGL','GLTF'],                 accent_color:'#F472B6', year:2024, is_featured:false, order:4, thumbnail:null, demo_url:'', github_url:'' },
+  { id:5, title:'App Immobilière',      description:'Filtres avancés, carte Leaflet, visites virtuelles, dashboard admin complet.',                              category:'web',  tags:['React','Django','Leaflet','PostgreSQL'],           accent_color:'#4ADE80', year:2024, is_featured:true,  order:5, thumbnail:null, demo_url:'', github_url:'' },
+  { id:6, title:'Pack Personnages 3D',  description:'Personnages riggés et animés dans Blender, exportés pour Unity et Unreal Engine.',                          category:'3d',   tags:['Blender','Rigging','Animation','FBX'],             accent_color:'#FBBF24', year:2023, is_featured:false, order:6, thumbnail:null, demo_url:'', github_url:'' },
+]
+
+function hex2rgba(hex: string, alpha: number) {
+  const r = parseInt(hex.slice(1,3),16)
+  const g = parseInt(hex.slice(3,5),16)
+  const b = parseInt(hex.slice(5,7),16)
+  return `rgba(${r},${g},${b},${alpha})`
+}
 
 export default function Projects() {
   const { ref, inView } = useInView({ threshold: 0.08, triggerOnce: true })
   const [active, setActive] = useState<Cat>('all')
   const { theme: t } = useTheme()
+  const [apiData, setApiData] = useState<ApiProject[]>(FALLBACK)
 
-  const projects = [
-    { id:1, emoji:'🛒', title:'E-Commerce Platform',
-      desc:"Boutique complète avec React, Django, Stripe et gestion d'inventaire en temps réel.",
-      tags:['React','Django','PostgreSQL','Stripe','Docker'],
-      cat:'web' as Cat, ...t.pairs.purple, year:'2024', impact:'10k+ produits',
-      gradient:`linear-gradient(135deg, ${t.pairs.purple.color}BB, ${t.pairs.pink.color}BB)`,
-    },
-    { id:2, emoji:'📊', title:'Système ERP',
-      desc:'RH, inventaire, comptabilité, reporting. Architecture modulaire pour une entreprise de fabrication.',
-      tags:['React','Django','PostgreSQL','Charts.js'],
-      cat:'web' as Cat, ...t.pairs.blue, year:'2023', impact:'50+ utilisateurs',
-      gradient:`linear-gradient(135deg, ${t.pairs.blue.color}BB, ${t.pairs.green.color}BB)`,
-    },
-    { id:3, emoji:'🎮', title:'Jeu Unity 3D',
-      desc:'Monde immersif Unity avec personnages Blender, shaders custom et physique avancée.',
-      tags:['Unity','C#','Blender','Animation'],
-      cat:'game' as Cat, ...t.pairs.orange, year:'2023', impact:'Indie · Shipped',
-      gradient:`linear-gradient(135deg, ${t.pairs.orange.color}BB, ${t.pairs.gold.color}BB)`,
-    },
-    { id:4, emoji:'', title:'3D Product Viewer',
-      desc:'Visualiseur Three.js interactif : matériaux, éclairage HDR, rotations — dans le navigateur.',
-      tags:['Three.js','React','WebGL','GLTF'],
-      cat:'3d' as Cat, ...t.pairs.pink, year:'2024', impact:'Web · Interactive',
-      gradient:`linear-gradient(135deg, ${t.pairs.pink.color}BB, ${t.pairs.purple.color}BB)`,
-    },
-    { id:5, emoji:'🏠', title:'App Immobilière',
-      desc:'Filtres avancés, carte Leaflet, visites virtuelles, dashboard admin complet.',
-      tags:['React','Django','Leaflet','PostgreSQL'],
-      cat:'web' as Cat, ...t.pairs.green, year:'2024', impact:'Production · Live',
-      gradient:`linear-gradient(135deg, ${t.pairs.green.color}BB, ${t.pairs.blue.color}BB)`,
-    },
-    { id:6, emoji:'🎨', title:'Pack Personnages 3D',
-      desc:'Personnages riggés et animés dans Blender, exportés pour Unity et Unreal Engine.',
-      tags:['Blender','Rigging','Animation','FBX'],
-      cat:'3d' as Cat, ...t.pairs.gold, year:'2023', impact:'3D Assets',
-      gradient:`linear-gradient(135deg, ${t.pairs.gold.color}BB, ${t.pairs.orange.color}BB)`,
-    },
-  ]
+  useEffect(() => {
+    fetchProjects()
+      .then(data => { if (data.length) setApiData(data) })
+      .catch(() => { /* keep fallback */ })
+  }, [])
+
+  const projects = apiData.map(p => {
+    const enr = ENRICHMENT[p.title] ?? { emoji: '🦋', impact: 'Livré' }
+    const c = p.accent_color
+    return {
+      id: p.id,
+      emoji: enr.emoji,
+      title: p.title,
+      desc: p.description,
+      tags: p.tags,
+      cat: p.category as Cat,
+      year: String(p.year),
+      impact: enr.impact,
+      color:  c,
+      bg:     hex2rgba(c, 0.12),
+      border: hex2rgba(c, 0.25),
+      gradient: `linear-gradient(135deg, ${hex2rgba(c,0.73)}, ${hex2rgba(c,0.45)})`,
+      demoUrl:   p.demo_url,
+      githubUrl: p.github_url,
+    }
+  })
 
   const filters = [
     { label:'Tout',       value:'all'  as Cat, color: t.text,              bg:'rgba(255,255,255,0.1)'  },
