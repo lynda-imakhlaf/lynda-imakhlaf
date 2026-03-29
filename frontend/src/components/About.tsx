@@ -1,195 +1,122 @@
 import { useInView } from 'react-intersection-observer'
 
 const CARDS = [
-  { icon:'⚡', title:'Full Stack Web', desc:'React + Django de bout en bout. APIs, bases de données, déploiement.', color:'#8B5CF6', bg:'#F5F3FF', border:'rgba(139,92,246,0.2)' },
-  { icon:'🎮', title:'Game Dev',       desc:'Unity + C#. Mécaniques de jeu, physique, mondes immersifs en 3D.',   color:'#FF6B35', bg:'#FFF4F0', border:'rgba(255,107,53,0.2)' },
-  { icon:'🎨', title:'3D & Animation', desc:'Blender : modélisation, rigging, animation. Assets prêts pour le web.',color:'#0EA5E9', bg:'#F0F9FF', border:'rgba(14,165,233,0.2)' },
-  { icon:'🚀', title:'Freelance',       desc:'Livraison rapide, code propre, communication claire. Toujours.',       color:'#00C896', bg:'#F0FDF9', border:'rgba(0,200,150,0.2)' },
+  { icon:'⚡', title:'Full Stack Web',   desc:'React + Django de bout en bout. APIs, bases de données, déploiement.',     color:'#7C3AED', bg:'rgba(124,58,237,0.08)',  border:'rgba(124,58,237,0.2)'  },
+  { icon:'🎮', title:'Game Dev',          desc:'Unity + C#. Mécaniques de jeu, physique, mondes immersifs en 3D.',           color:'#C2410C', bg:'rgba(194,65,12,0.08)',  border:'rgba(194,65,12,0.2)'   },
+  { icon:'🦋', title:'3D & Animation',   desc:'Blender : modélisation, rigging, animation. Assets prêts pour le web.',       color:'#0369A1', bg:'rgba(3,105,161,0.08)',  border:'rgba(3,105,161,0.2)'   },
+  { icon:'✨', title:'Freelance',          desc:'Livraison rapide, code propre, communication claire. Toujours.',               color:'#15803D', bg:'rgba(21,128,61,0.08)',  border:'rgba(21,128,61,0.2)'   },
 ]
 
 const STATS = [
-  { n:'5+', l:'ans d\'exp.', color:'#FF2D78', bg:'#FFF0F5' },
-  { n:'20+', l:'projets',   color:'#8B5CF6', bg:'#F5F3FF' },
-  { n:'3',  l:'domaines',   color:'#0EA5E9', bg:'#F0F9FF' },
-  { n:'∞',  l:'café ☕',   color:'#FF6B35', bg:'#FFF4F0' },
+  { n:'5+', l:'ans d\'exp.', color:'#7C3AED', bg:'rgba(124,58,237,0.1)' },
+  { n:'20+', l:'projets',    color:'#DB2777',  bg:'rgba(219,39,119,0.1)' },
+  { n:'3',   l:'domaines',   color:'#0369A1',  bg:'rgba(3,105,161,0.1)'  },
+  { n:'∞',   l:'créativité', color:'#15803D',  bg:'rgba(21,128,61,0.1)'  },
 ]
 
 export default function About() {
   const { ref, inView } = useInView({ threshold: 0.08, triggerOnce: true })
 
   return (
-    <section id="about" ref={ref} style={{
-      padding:'100px 0', position:'relative', overflow:'hidden',
-      background:'transparent',
-    }}>
-      {/* Polka dot pattern — subtle */}
-      <div style={{
-        position:'absolute', inset:0, pointerEvents:'none', opacity:0.4,
-        backgroundImage:'radial-gradient(circle, rgba(139,92,246,0.12) 1px, transparent 1px)',
-        backgroundSize:'28px 28px',
-      }} />
+    <section id="about" ref={ref} style={{ padding:'100px 0', position:'relative', overflow:'hidden', background:'transparent' }}>
 
       <style>{`
-        @keyframes ab-in { from{opacity:0;transform:translateY(34px);}to{opacity:1;transform:translateY(0);} }
+        @keyframes ab-in { from{opacity:0;transform:translateY(30px);}to{opacity:1;transform:translateY(0);} }
         .ab { opacity:0; }
         .ab.v { animation:ab-in 0.65s ease forwards; }
-
         .about-card {
           border-radius:20px; padding:24px;
-          transition:all 0.32s cubic-bezier(0.4,0,0.2,1);
-          position:relative; overflow:hidden;
+          transition:all 0.32s ease;
+          backdrop-filter:blur(16px); -webkit-backdrop-filter:blur(16px);
         }
-        .about-card:hover {
-          transform:translateY(-6px) rotate(0.5deg);
-          box-shadow:0 16px 40px rgba(26,22,48,0.12);
-        }
-
-        .stat-pill {
-          border-radius:18px; padding:18px 16px;
-          text-align:center; transition:all 0.3s;
-          border:1.5px solid transparent;
-        }
-        .stat-pill:hover {
-          transform:translateY(-5px) scale(1.04);
-          box-shadow:0 12px 28px rgba(26,22,48,0.1);
-        }
-
-        .terminal-bar {
-          display:flex; align-items:center; gap:7px;
-          padding:10px 16px;
-          border-bottom:1px solid rgba(26,22,48,0.07);
-          margin-bottom:20px;
-        }
-        .terminal-dot { width:10px; height:10px; border-radius:50%; }
+        .about-card:hover { transform:translateY(-6px) rotate(0deg)!important; box-shadow:0 20px 50px rgba(124,58,237,0.15)!important; }
       `}</style>
 
       <div className="container">
 
         {/* Header */}
-        <div className={`ab ${inView?'v':''}`} style={{ animationDelay:'0s', marginBottom:'64px' }}>
-          <p className="section-label" style={{ color:'#8B5CF6' }}>✦ About me</p>
+        <div className={`ab ${inView?'v':''}`} style={{ animationDelay:'0s', marginBottom:'60px' }}>
+          <p className="section-label">🦋 À propos</p>
           <h2 className="section-title">
-            Je construis des{' '}
-            <span style={{
-              background:'linear-gradient(135deg,#FF2D78,#8B5CF6)',
-              WebkitBackgroundClip:'text', WebkitTextFillColor:'transparent', backgroundClip:'text',
-            }}>
-              expériences
+            Qui je{' '}
+            <span style={{ background:'linear-gradient(135deg,#7C3AED,#DB2777)', WebkitBackgroundClip:'text', WebkitTextFillColor:'transparent', backgroundClip:'text', fontStyle:'italic' }}>
+              suis
             </span>
           </h2>
-          <div style={{ width:'70px', height:'5px', borderRadius:'3px',
-            background:'linear-gradient(90deg,#FF2D78,#8B5CF6)', marginBottom:'20px' }} />
+          <div className="title-bar" />
           <p className="section-sub">
-            5 ans d'expérience. Web, 3D, jeux. Full-time + freelance.
+            Développeuse full-stack, artiste 3D et créatrice de jeux. Je construis des choses belles et qui fonctionnent.
           </p>
         </div>
 
-        <div style={{
-          display:'grid', gridTemplateColumns:'repeat(auto-fit,minmax(300px,1fr))',
-          gap:'56px', alignItems:'start',
-        }}>
+        <div style={{ display:'grid', gridTemplateColumns:'repeat(auto-fit,minmax(300px,1fr))', gap:'40px', alignItems:'start' }}>
 
-          {/* Left — bio card */}
+          {/* Bio card */}
           <div className={`ab ${inView?'v':''}`} style={{ animationDelay:'0.15s' }}>
             <div style={{
-              background:'white',
-              border:'1.5px solid rgba(26,22,48,0.09)',
-              borderRadius:'24px', overflow:'hidden',
-              boxShadow:'0 8px 32px rgba(26,22,48,0.08)',
+              background:'rgba(255,255,255,0.65)', backdropFilter:'blur(18px)',
+              border:'1.5px solid rgba(255,255,255,0.85)',
+              borderRadius:'24px', padding:'32px',
+              boxShadow:'0 8px 32px rgba(124,58,237,0.1)',
+              position:'relative', overflow:'hidden',
             }}>
-              {/* Colored header bar */}
-              <div style={{
-                height:'6px',
-                background:'linear-gradient(90deg,#FF2D78,#FF6B35,#FFBD35,#00C896,#0EA5E9,#8B5CF6)',
-              }} />
-              <div className="terminal-bar">
-                <div className="terminal-dot" style={{ background:'#FF5F57' }} />
-                <div className="terminal-dot" style={{ background:'#FEBC2E' }} />
-                <div className="terminal-dot" style={{ background:'#28C840' }} />
-                <span style={{ fontFamily:"'JetBrains Mono',monospace", fontSize:'12px', color:'#9B99B0', marginLeft:'6px' }}>
-                  ~/lynda/about.md
+              {/* Gradient top bar */}
+              <div style={{ position:'absolute', top:0, left:0, right:0, height:'4px', background:'linear-gradient(90deg,#7C3AED,#DB2777,#C2410C,#15803D,#0369A1)' }} />
+
+              <div style={{ display:'flex', alignItems:'center', gap:'12px', marginBottom:'20px', paddingTop:'8px' }}>
+                <img src="/papi4.png" alt="" style={{ width:'36px', height:'36px', objectFit:'contain' }} />
+                <span style={{ fontFamily:"'Nunito',sans-serif", fontSize:'13px', fontWeight:800, color:'#5B21B6', letterSpacing:'1px', textTransform:'uppercase' }}>
+                  lynda.portfolio
                 </span>
               </div>
-              <div style={{ padding:'0 24px 26px' }}>
-                {[
-                  <>Bonjour 👋 Je suis <strong>Lynda Imakhlaf</strong>, ingénieure full-stack basée en Algérie, avec 5+ ans d'expérience sur des projets réels.</>,
-                  <>Je travaille full-time en entreprise et prends des missions <strong style={{color:'#8B5CF6'}}>freelance</strong> sur mon temps libre — e-commerce, ERP, apps complexes.</>,
-                  <>Au-delà du web, je modélise en <strong style={{color:'#FF6B35'}}>Blender</strong>, développe des jeux avec <strong style={{color:'#0EA5E9'}}>Unity</strong>, et j'anime. Technique + créativité.</>,
-                ].map((text, i) => (
-                  <p key={i} style={{ color:'#5A5878', lineHeight:1.8, fontSize:'0.95rem',
-                    marginBottom: i < 2 ? '14px' : '20px' }}>
-                    {text}
-                  </p>
+
+              <p style={{ color:'#5B21B6', lineHeight:1.9, fontSize:'0.95rem', fontWeight:500, marginBottom:'24px' }}>
+                Développeuse passionnée avec <strong style={{color:'#2E1065'}}>5+ ans d'expérience</strong> en développement web full-stack, modélisation 3D avec Blender, et création de jeux sous Unity.
+                <br /><br />
+                J'aime transformer des idées complexes en expériences digitales élégantes — qu'il s'agisse d'une API Django robuste, d'un shader Three.js ou d'un personnage animé.
+              </p>
+
+              {/* Stats */}
+              <div style={{ display:'flex', flexWrap:'wrap', gap:'10px' }}>
+                {STATS.map(s => (
+                  <div key={s.n} style={{
+                    padding:'8px 16px', borderRadius:'999px',
+                    background:s.bg, border:`1px solid ${s.color}30`,
+                    display:'flex', alignItems:'center', gap:'6px',
+                  }}>
+                    <span style={{ fontFamily:"'Playfair Display',serif", fontSize:'1.1rem', fontWeight:900, color:s.color }}>{s.n}</span>
+                    <span style={{ fontFamily:"'Nunito',sans-serif", fontSize:'11px', fontWeight:700, color:s.color, opacity:0.8 }}>{s.l}</span>
+                  </div>
                 ))}
-                <div style={{ display:'flex', gap:'10px', flexWrap:'wrap' }}>
-                  <a href="mailto:imakhlflyndatiane@gmail.com"
-                    style={{
-                      display:'inline-flex', alignItems:'center', gap:'8px',
-                      padding:'10px 22px', borderRadius:'999px',
-                      background:'linear-gradient(135deg,#FF2D78,#8B5CF6)',
-                      color:'white', fontFamily:"'JetBrains Mono',monospace",
-                      fontSize:'12px', fontWeight:700,
-                      boxShadow:'0 4px 16px rgba(255,45,120,0.3)',
-                    }}>
-                    Contact
-                  </a>
-                  <a href="https://github.com/lynda-imakhlaf" target="_blank" rel="noopener noreferrer"
-                    style={{
-                      display:'inline-flex', alignItems:'center', gap:'8px',
-                      padding:'10px 20px', borderRadius:'999px',
-                      background:'white', color:'#1A1630',
-                      border:'1.5px solid rgba(26,22,48,0.12)',
-                      fontFamily:"'JetBrains Mono',monospace", fontSize:'12px', fontWeight:600,
-                      boxShadow:'0 2px 8px rgba(26,22,48,0.07)',
-                    }}>
-                    GitHub
-                  </a>
-                </div>
               </div>
             </div>
           </div>
 
-          {/* Right — 4 colorful cards + stats */}
-          <div style={{ display:'flex', flexDirection:'column', gap:'18px' }}>
-
-            {/* Cards 2×2 — slightly rotated for asymmetry */}
-            <div style={{ display:'grid', gridTemplateColumns:'1fr 1fr', gap:'14px' }}>
-              {CARDS.map((c, i) => (
-                <div key={i} className={`about-card ab ${inView?'v':''}`}
-                  style={{
-                    animationDelay:`${0.2 + i * 0.1}s`,
-                    background:c.bg,
-                    border:`1.5px solid ${c.border}`,
-                    transform: `rotate(${i % 2 === 0 ? '0.6deg' : '-0.6deg'})`,
-                  }}>
-                  <div style={{ fontSize:'1.5rem', marginBottom:'10px' }}>{c.icon}</div>
-                  <h3 style={{ fontSize:'0.88rem', fontWeight:800, color:c.color, marginBottom:'7px' }}>
-                    {c.title}
-                  </h3>
-                  <p style={{ fontSize:'0.78rem', color:'#5A5878', lineHeight:1.65 }}>{c.desc}</p>
+          {/* Skill cards */}
+          <div style={{ display:'grid', gridTemplateColumns:'1fr 1fr', gap:'14px' }}>
+            {CARDS.map((c, i) => (
+              <div key={i} className={`about-card ab ${inView?'v':''}`}
+                style={{
+                  animationDelay:`${0.25 + i * 0.1}s`,
+                  background:'rgba(255,255,255,0.6)',
+                  border:`1.5px solid ${c.border}`,
+                  boxShadow:`0 4px 20px ${c.color}12`,
+                  transform: i % 2 === 0 ? 'rotate(0.5deg)' : 'rotate(-0.5deg)',
+                }}>
+                <div style={{
+                  width:'44px', height:'44px', borderRadius:'14px',
+                  background:c.bg, border:`1.5px solid ${c.border}`,
+                  display:'flex', alignItems:'center', justifyContent:'center',
+                  fontSize:'1.3rem', marginBottom:'14px',
+                }}>
+                  {c.icon}
                 </div>
-              ))}
-            </div>
-
-            {/* Stats */}
-            <div className={`ab ${inView?'v':''}`} style={{
-              animationDelay:'0.55s',
-              display:'grid', gridTemplateColumns:'repeat(4,1fr)', gap:'10px',
-            }}>
-              {STATS.map(({ n, l, color, bg }, i) => (
-                <div key={i} className="stat-pill" style={{ background:bg, borderColor:`${color}25` }}>
-                  <div style={{ fontFamily:"'JetBrains Mono',monospace",
-                    fontSize:'1.6rem', fontWeight:900, color, marginBottom:'4px', lineHeight:1 }}>
-                    {n}
-                  </div>
-                  <div style={{ fontFamily:"'JetBrains Mono',monospace",
-                    fontSize:'10px', color:'#9B99B0', lineHeight:1.4, textAlign:'center' }}>
-                    {l}
-                  </div>
-                </div>
-              ))}
-            </div>
+                <h3 style={{ fontFamily:"'Nunito',sans-serif", fontSize:'14px', fontWeight:800, color:'#2E1065', marginBottom:'8px' }}>{c.title}</h3>
+                <p style={{ fontSize:'12px', color:'#6B4FA0', lineHeight:1.6, fontWeight:500 }}>{c.desc}</p>
+              </div>
+            ))}
           </div>
+
         </div>
       </div>
     </section>

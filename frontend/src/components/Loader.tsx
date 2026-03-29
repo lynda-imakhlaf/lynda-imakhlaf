@@ -10,70 +10,71 @@ export default function Loader() {
     return () => clearInterval(iv)
   }, [])
 
-  const colors = ['#FF2D78','#FF6B35','#8B5CF6']
   const p = Math.min(pct, 100)
-  const idx = Math.floor((p / 100) * (colors.length - 1))
-  const accentColor = colors[idx]
 
   return (
     <div style={{
       position:'fixed', inset:0,
-      background:'#F6F4FF',
+      backgroundImage:'url(/bg.jpg)', backgroundSize:'cover', backgroundPosition:'center',
+      backgroundColor:'#EDE9FE',
       display:'flex', flexDirection:'column',
       alignItems:'center', justifyContent:'center',
       zIndex:9999, gap:'0',
     }}>
       <style>{`
         @keyframes spin { to { transform:rotate(360deg); } }
-        @keyframes ld-pop { 0%,100%{transform:scale(1);}50%{transform:scale(1.08);} }
+        @keyframes papi-bounce { 0%,100%{transform:scale(1) rotate(-5deg);}50%{transform:scale(1.12) rotate(5deg);} }
       `}</style>
 
-      {/* Spinning rainbow ring + papi4 inside */}
+      {/* Spinning rainbow ring with papi4 */}
       <div style={{
-        width:'90px', height:'90px', borderRadius:'50%', marginBottom:'30px',
-        background:`conic-gradient(from 0deg, #FF2D78, #8B5CF6, #FF2D78)`,
-        animation:'spin 1.2s linear infinite',
+        width:'100px', height:'100px', borderRadius:'50%', marginBottom:'30px',
+        background:'conic-gradient(from 0deg, #7C3AED, #DB2777, #C2410C, #D97706, #15803D, #0369A1, #7C3AED)',
+        animation:'spin 1.4s linear infinite',
         display:'flex', alignItems:'center', justifyContent:'center',
         position:'relative',
       }}>
-        {/* White inner circle */}
         <div style={{
-          width:'74px', height:'74px', borderRadius:'50%',
-          background:'#F6F4FF',
+          width:'82px', height:'82px', borderRadius:'50%',
+          backgroundImage:'url(/bg.jpg)', backgroundSize:'cover',
+          backgroundColor:'#EDE9FE',
           display:'flex', alignItems:'center', justifyContent:'center',
-          animation:'ld-pop 1.2s ease-in-out infinite',
-          overflow:'hidden',
         }}>
           <img src="/papi4.png" alt="" style={{
-            width:'58px', height:'58px', objectFit:'contain',
-            filter:'drop-shadow(0 2px 6px rgba(255,45,120,0.3))',
+            width:'62px', height:'62px', objectFit:'contain',
+            animation:'papi-bounce 1.4s ease-in-out infinite',
           }} />
         </div>
       </div>
 
-      {/* Rainbow progress bar */}
+      {/* Progress bar */}
       <div style={{
         width:'200px', height:'5px',
-        background:'rgba(26,22,48,0.08)',
+        background:'rgba(124,58,237,0.12)',
         borderRadius:'3px', overflow:'hidden', marginBottom:'14px',
-        border:'1px solid rgba(26,22,48,0.06)',
+        border:'1px solid rgba(168,85,247,0.2)',
       }}>
         <div style={{
           height:'100%', borderRadius:'3px',
           width:`${p}%`,
-          background:'linear-gradient(90deg,#FF2D78,#FF6B35,#FFBD35,#00C896,#0EA5E9,#8B5CF6)',
+          background:'linear-gradient(90deg,#7C3AED,#DB2777,#C2410C)',
           transition:'width 0.12s ease',
-          backgroundSize:'200px 100%',
         }} />
       </div>
 
       <span style={{
-        fontFamily:"'JetBrains Mono',monospace", fontSize:'11px',
-        color: accentColor, fontWeight:700, letterSpacing:'2px',
-        transition:'color 0.4s ease',
+        fontFamily:"'Nunito',sans-serif", fontSize:'13px',
+        color:'#7C3AED', fontWeight:800, letterSpacing:'2px',
       }}>
         {Math.round(p)}%
       </span>
+
+      <p style={{
+        marginTop:'10px', fontFamily:"'Pacifico',cursive",
+        fontSize:'14px', color:'#A855F7', opacity:0.7,
+      }}>
+        lynda.
+      </p>
     </div>
   )
 }
