@@ -13,7 +13,7 @@ export default function About() {
   ]
 
   const stats = [
-    { n:'5+',  l:"ans d'exp.", ...t.pairs.purple },
+    { n:'9+',  l:"ans d'exp.", ...t.pairs.purple },
     { n:'20+', l:'projets',    ...t.pairs.pink   },
     { n:'3',   l:'domaines',   ...t.pairs.blue   },
     { n:'∞',   l:'créativité', ...t.pairs.green  },
@@ -74,7 +74,7 @@ export default function About() {
               </div>
 
               <p style={{ color: t.soft, lineHeight:1.9, fontSize:'0.95rem', fontWeight:500, marginBottom:'24px' }}>
-                Développeuse passionnée avec <strong style={{color: t.text}}>5+ ans d'expérience</strong> en développement web full-stack, modélisation 3D avec Blender, et création de jeux sous Unity.
+                Développeuse passionnée avec <strong style={{color: t.text}}>9+ ans d'expérience</strong> en développement web full-stack, modélisation 3D avec Blender, et création de jeux sous Unity.
                 <br /><br />
                 J'aime transformer des idées complexes en expériences digitales élégantes — qu'il s'agisse d'une API Django robuste, d'un shader Three.js ou d'un personnage animé.
               </p>

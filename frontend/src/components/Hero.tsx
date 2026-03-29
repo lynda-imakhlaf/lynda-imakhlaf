@@ -183,7 +183,7 @@ export default function Hero() {
             fontSize:'1.1rem', color: t.soft, fontWeight:500,
             maxWidth:'480px', lineHeight:1.85, marginBottom:'38px',
           }}>
-            5+ ans à construire des apps web, des mondes en 3D et des jeux.
+            9+ ans à construire des apps web, des mondes en 3D et des jeux.
             {' '}<strong style={{ color: t.text, fontWeight:800 }}>Full-time</strong> en entreprise
             {' '}+{' '}<span style={{
               background:'var(--grad-text-main)',
@@ -214,7 +214,7 @@ export default function Hero() {
             ))}
             <div style={{ width:'1px', height:'26px', background:'rgba(168,85,247,0.2)' }} />
             {[
-              { n:'5+',  l:'ans'      },
+              { n:'9+',  l:'ans'      },
               { n:'20+', l:'projets'  },
               { n:'3',   l:'domaines' },
             ].map(({ n, l }) => (

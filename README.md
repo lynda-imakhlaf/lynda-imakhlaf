@@ -12,7 +12,7 @@
 
 ---
 
-Full-stack engineer with **5+ years of experience** building things that actually ship —
+Full-stack engineer with **9+ years of experience** building things that actually ship —
 from e-commerce platforms and complex web apps to full ERP systems and 3D games.
 I work across the entire stack: React frontends, Django backends, and everything in between.
 Currently working full-time, still building on the side. **I don't just write code — I solve problems.**
