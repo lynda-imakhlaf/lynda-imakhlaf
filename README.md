@@ -58,8 +58,8 @@ Currently working full-time, still building on the side. **I don't just write co
 
 <div align="center">
 
-[![LinkedIn](https://img.shields.io/badge/LinkedIn-0d0221?style=for-the-badge&logo=linkedin&logoColor=0A66C2)](https://linkedin.com/in/YOUR_LINKEDIN)
-[![Portfolio](https://img.shields.io/badge/Portfolio-0d0221?style=for-the-badge&logo=vercel&logoColor=white)](https://YOUR_PORTFOLIO_URL)
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-0d0221?style=for-the-badge&logo=linkedin&logoColor=0A66C2)](https://www.linkedin.com/in/lynda-tinhinane-imakhlaf-944244153/)
+[![Portfolio](https://img.shields.io/badge/Portfolio-0d0221?style=for-the-badge&logo=vercel&logoColor=white)](https://lynda-imakhlaf.vercel.app/)
 
 *"The best code is the code that solves real problems — elegantly."*
 
