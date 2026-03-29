@@ -1,15 +1,18 @@
 import { TypeAnimation } from 'react-type-animation'
 import { Link } from 'react-scroll'
+import { useTheme } from '../ThemeContext'
 
 const PAPIS = [
-  { src:'/papi.png',  size:190, top:'6%',  right:'30%', anim:'papi-a', dur:'5s',   delay:'0s',   halo:'rgba(3,105,161,0.15)',   rotate:'-6deg' },
-  { src:'/papi1.png', size:150, top:'16%', right:'10%', anim:'papi-b', dur:'4.2s', delay:'0.7s', halo:'rgba(21,128,61,0.15)',   rotate:'5deg'  },
-  { src:'/papi2.png', size:170, top:'50%', right:'26%', anim:'papi-c', dur:'6s',   delay:'1.3s', halo:'rgba(194,65,12,0.15)',   rotate:'-3deg' },
-  { src:'/papi3.png', size:130, top:'60%', right:'8%',  anim:'papi-a', dur:'4.8s', delay:'0.4s', halo:'rgba(219,39,119,0.15)',  rotate:'8deg'  },
-  { src:'/papi4.png', size:155, top:'33%', right:'17%', anim:'papi-b', dur:'5.5s', delay:'1.0s', halo:'rgba(124,58,237,0.15)',  rotate:'-10deg'},
+  { src:'/papi.png',  size:190, top:'6%',  right:'30%', anim:'papi-a', dur:'5s',   delay:'0s',   haloD:'rgba(56,189,248,0.28)',  haloL:'rgba(3,105,161,0.15)',   rotate:'-6deg'  },
+  { src:'/papi1.png', size:150, top:'16%', right:'10%', anim:'papi-b', dur:'4.2s', delay:'0.7s', haloD:'rgba(74,222,128,0.28)',  haloL:'rgba(21,128,61,0.15)',   rotate:'5deg'   },
+  { src:'/papi2.png', size:170, top:'50%', right:'26%', anim:'papi-c', dur:'6s',   delay:'1.3s', haloD:'rgba(251,146,60,0.28)',  haloL:'rgba(194,65,12,0.15)',   rotate:'-3deg'  },
+  { src:'/papi3.png', size:130, top:'60%', right:'8%',  anim:'papi-a', dur:'4.8s', delay:'0.4s', haloD:'rgba(244,114,182,0.30)', haloL:'rgba(219,39,119,0.15)',  rotate:'8deg'   },
+  { src:'/papi4.png', size:155, top:'33%', right:'17%', anim:'papi-b', dur:'5.5s', delay:'1.0s', haloD:'rgba(168,85,247,0.35)',  haloL:'rgba(124,58,237,0.15)',  rotate:'-10deg' },
 ]
 
 export default function Hero() {
+  const { theme: t } = useTheme()
+
   return (
     <section id="hero" style={{
       position:'relative', height:'100vh', display:'flex',
@@ -55,45 +58,43 @@ export default function Hero() {
         .h-btn-main {
           display:inline-flex; align-items:center; gap:8px;
           padding:14px 32px; border-radius:999px;
-          background:linear-gradient(135deg,#7C3AED,#DB2777);
+          background:linear-gradient(135deg,${t.isDark ? '#A855F7,#F472B6' : '#7C3AED,#DB2777'});
           color:white; font-family:'Nunito',sans-serif;
           font-size:15px; font-weight:800; border:none; cursor:pointer;
-          box-shadow:0 6px 24px rgba(124,58,237,0.38);
+          box-shadow:0 6px 24px rgba(168,85,247,${t.isDark ? '0.5' : '0.38'})${t.isDark ? ', 0 0 30px rgba(168,85,247,0.25)' : ''};
           transition:all 0.3s; text-decoration:none;
         }
-        .h-btn-main:hover { transform:translateY(-4px) scale(1.02); box-shadow:0 12px 36px rgba(124,58,237,0.48); color:white; }
+        .h-btn-main:hover { transform:translateY(-4px) scale(1.02); color:white; }
         .h-btn-ghost {
           display:inline-flex; align-items:center; gap:8px;
           padding:13px 30px; border-radius:999px;
-          background:rgba(255,255,255,0.65); color:#5B21B6;
+          background:${t.isDark ? 'rgba(255,255,255,0.07)' : 'rgba(255,255,255,0.65)'}; color:${t.soft};
           font-family:'Nunito',sans-serif; font-size:15px; font-weight:800;
-          border:2px solid rgba(168,85,247,0.3);
+          border:1.5px solid rgba(168,85,247,0.${t.isDark ? '25' : '30'});
           backdrop-filter:blur(12px);
-          cursor:pointer; transition:all 0.3s;
-          box-shadow:0 4px 16px rgba(124,58,237,0.1); text-decoration:none;
+          cursor:pointer; transition:all 0.3s; text-decoration:none;
         }
-        .h-btn-ghost:hover { border-color:#7C3AED; color:#7C3AED; transform:translateY(-4px); box-shadow:0 8px 28px rgba(124,58,237,0.2); }
+        .h-btn-ghost:hover { border-color:${t.pairs.purple.color}; color:${t.isDark ? '#C084FC' : '#7C3AED'}; transform:translateY(-4px); }
         .soc {
           width:44px; height:44px; border-radius:14px;
           display:flex; align-items:center; justify-content:center;
-          background:rgba(255,255,255,0.65); color:#7C3AED;
-          border:1.5px solid rgba(168,85,247,0.25);
+          background:${t.isDark ? 'rgba(255,255,255,0.07)' : 'rgba(255,255,255,0.65)'}; color:${t.pairs.purple.color};
+          border:1px solid rgba(168,85,247,${t.isDark ? '0.2' : '0.25'});
           backdrop-filter:blur(12px);
-          box-shadow:0 2px 10px rgba(124,58,237,0.1);
           transition:all 0.25s; text-decoration:none;
         }
-        .soc:hover { background:#7C3AED; color:white; border-color:#7C3AED; transform:translateY(-4px) rotate(-5deg); box-shadow:0 8px 20px rgba(124,58,237,0.35); }
+        .soc:hover { background:${t.pairs.purple.color}; color:white; border-color:${t.pairs.purple.color}; transform:translateY(-4px) rotate(-5deg); }
         .papi-wrap { position:absolute; pointer-events:none; }
-        .papi-wrap img { width:100%; height:100%; object-fit:contain; filter:drop-shadow(0 12px 28px rgba(124,58,237,0.2)); }
+        .papi-wrap img { width:100%; height:100%; object-fit:contain; filter:${t.isDark ? 'drop-shadow(0 0 20px rgba(168,85,247,0.45)) drop-shadow(0 6px 16px rgba(0,0,0,0.3))' : 'drop-shadow(0 12px 28px rgba(124,58,237,0.2))'}; }
       `}</style>
 
-      {/* Soft blobs */}
-      <div style={{ position:'absolute', top:'-60px', left:'-60px', width:'400px', height:'400px',
+      {/* Ambient blobs */}
+      <div style={{ position:'absolute', top:'-80px', left:'-80px', width:'500px', height:'500px',
         borderRadius:'50%', pointerEvents:'none', zIndex:0,
-        background:'radial-gradient(circle, rgba(168,85,247,0.1) 0%, transparent 65%)' }} />
-      <div style={{ position:'absolute', bottom:'-40px', right:'-40px', width:'350px', height:'350px',
+        background:'radial-gradient(circle, rgba(168,85,247,0.07) 0%, transparent 65%)' }} />
+      <div style={{ position:'absolute', bottom:'-60px', right:'-60px', width:'420px', height:'420px',
         borderRadius:'50%', pointerEvents:'none', zIndex:0,
-        background:'radial-gradient(circle, rgba(219,39,119,0.08) 0%, transparent 65%)' }} />
+        background:'radial-gradient(circle, rgba(244,114,182,0.06) 0%, transparent 65%)' }} />
 
       {/* Butterfly images */}
       {PAPIS.map((p, i) => (
@@ -104,8 +105,8 @@ export default function Hero() {
           animationDelay:p.delay,
         }}>
           <div style={{
-            position:'absolute', inset:'-25%', borderRadius:'50%',
-            background:`radial-gradient(circle, ${p.halo} 0%, transparent 70%)`,
+            position:'absolute', inset:'-30%', borderRadius:'50%',
+            background:`radial-gradient(circle, ${t.isDark ? p.haloD : p.haloL} 0%, transparent 70%)`,
           }} />
           <img src={p.src} alt="" />
         </div>
@@ -113,8 +114,8 @@ export default function Hero() {
 
       {/* Bottom fade */}
       <div style={{
-        position:'absolute', bottom:0, left:0, right:0, height:'180px',
-        background:'linear-gradient(to bottom, transparent, rgba(237,233,254,0.5))',
+        position:'absolute', bottom:0, left:0, right:0, height:'200px',
+        background:`linear-gradient(to bottom, transparent, ${t.isDark ? 'rgba(15,5,32,0.65)' : 'rgba(237,233,254,0.5)'})`,
         zIndex:2, pointerEvents:'none',
       }} />
 
@@ -125,14 +126,15 @@ export default function Hero() {
           {/* Available badge */}
           <div className="hero-el" style={{
             display:'inline-flex', alignItems:'center', gap:'10px',
-            background:'rgba(255,255,255,0.72)', backdropFilter:'blur(12px)',
-            border:'1.5px solid rgba(124,58,237,0.2)',
+            background: t.isDark ? 'rgba(255,255,255,0.07)' : 'rgba(255,255,255,0.72)',
+            backdropFilter:'blur(12px)',
+            border:`1px solid rgba(168,85,247,${t.isDark ? '0.3' : '0.2'})`,
             borderRadius:'999px', padding:'8px 18px', marginBottom:'28px',
-            fontFamily:"'Nunito',sans-serif", fontSize:'13px', fontWeight:700, color:'#5B21B6',
-            boxShadow:'0 4px 16px rgba(124,58,237,0.12)',
+            fontFamily:"'Nunito',sans-serif", fontSize:'13px', fontWeight:700, color: t.soft,
+            boxShadow:`0 0 ${t.isDark ? '18px rgba(168,85,247,0.2)' : '16px rgba(124,58,237,0.12)'}`,
             animation:'badge-float 3s ease-in-out infinite',
           }}>
-            <span style={{ fontSize:'16px' }}>🦋</span>
+            <span style={{ fontSize:'16px' }}></span>
             Disponible pour du freelance
           </div>
 
@@ -141,7 +143,8 @@ export default function Hero() {
             fontFamily:"'Playfair Display', serif",
             fontSize:'clamp(3.2rem, 8.5vw, 7rem)',
             fontWeight:900, lineHeight:0.95,
-            letterSpacing:'-2px', color:'#2E1065', marginBottom:'6px',
+            letterSpacing:'-2px', color: t.text, marginBottom:'6px',
+            textShadow: t.isDark ? '0 0 40px rgba(168,85,247,0.25)' : 'none',
           }}>
             Lynda
           </h1>
@@ -150,8 +153,9 @@ export default function Hero() {
             fontSize:'clamp(3.2rem, 8.5vw, 7rem)',
             fontWeight:900, lineHeight:0.95, fontStyle:'italic',
             letterSpacing:'-2px', marginBottom:'28px',
-            background:'linear-gradient(135deg,#7C3AED 0%,#DB2777 60%,#C2410C 100%)',
+            background: 'var(--grad-text-name)',
             WebkitBackgroundClip:'text', WebkitTextFillColor:'transparent', backgroundClip:'text',
+            filter: t.isDark ? 'drop-shadow(0 0 20px rgba(192,132,252,0.5))' : 'none',
           }}>
             Imakhlaf.
           </h1>
@@ -160,7 +164,7 @@ export default function Hero() {
           <div className="hero-el" style={{
             fontFamily:"'Nunito',sans-serif",
             fontSize:'clamp(1rem, 2vw, 1.25rem)', fontWeight:600,
-            color:'#8B5CF6', marginBottom:'20px', minHeight:'32px',
+            color: t.mute, marginBottom:'20px', minHeight:'32px',
           }}>
             <TypeAnimation
               sequence={[
@@ -176,13 +180,13 @@ export default function Hero() {
 
           {/* Description */}
           <p className="hero-el" style={{
-            fontSize:'1.1rem', color:'#5B21B6', fontWeight:500,
+            fontSize:'1.1rem', color: t.soft, fontWeight:500,
             maxWidth:'480px', lineHeight:1.85, marginBottom:'38px',
           }}>
             5+ ans à construire des apps web, des mondes en 3D et des jeux.
-            {' '}<strong style={{ color:'#2E1065', fontWeight:800 }}>Full-time</strong> en entreprise
+            {' '}<strong style={{ color: t.text, fontWeight:800 }}>Full-time</strong> en entreprise
             {' '}+{' '}<span style={{
-              background:'linear-gradient(135deg,#7C3AED,#DB2777)',
+              background:'var(--grad-text-main)',
               WebkitBackgroundClip:'text', WebkitTextFillColor:'transparent', backgroundClip:'text',
               fontWeight:800,
             }}>freelance</span>{' '}disponible.
@@ -208,15 +212,15 @@ export default function Hero() {
               <a key={l} href={h} target={l!=='Email'?'_blank':undefined}
                 rel="noopener noreferrer" className="soc" title={l}>{i}</a>
             ))}
-            <div style={{ width:'1px', height:'26px', background:'rgba(124,58,237,0.15)' }} />
+            <div style={{ width:'1px', height:'26px', background:'rgba(168,85,247,0.2)' }} />
             {[
-              { n:'5+', l:'ans' },
-              { n:'20+', l:'projets' },
-              { n:'3', l:'domaines' },
+              { n:'5+',  l:'ans'      },
+              { n:'20+', l:'projets'  },
+              { n:'3',   l:'domaines' },
             ].map(({ n, l }) => (
               <div key={l} style={{ textAlign:'center' }}>
-                <div style={{ fontFamily:"'Playfair Display',serif", fontSize:'1.2rem', fontWeight:800, color:'#2E1065' }}>{n}</div>
-                <div style={{ fontFamily:"'Nunito',sans-serif", fontSize:'10px', color:'#8B5CF6', letterSpacing:'1px', fontWeight:700, textTransform:'uppercase' }}>{l}</div>
+                <div style={{ fontFamily:"'Playfair Display',serif", fontSize:'1.2rem', fontWeight:800, color: t.text }}>{n}</div>
+                <div style={{ fontFamily:"'Nunito',sans-serif", fontSize:'10px', color: t.mute, letterSpacing:'1px', fontWeight:700, textTransform:'uppercase' }}>{l}</div>
               </div>
             ))}
           </div>
@@ -231,14 +235,16 @@ export default function Hero() {
       }}>
         <div style={{
           width:'24px', height:'38px', borderRadius:'12px',
-          border:'2px solid rgba(124,58,237,0.25)',
+          border:`1.5px solid rgba(168,85,247,${t.isDark ? '0.3' : '0.25'})`,
           display:'flex', justifyContent:'center', paddingTop:'6px',
-          background:'rgba(255,255,255,0.6)', backdropFilter:'blur(8px)',
+          background: t.isDark ? 'rgba(255,255,255,0.06)' : 'rgba(255,255,255,0.6)',
+          backdropFilter:'blur(8px)',
         }}>
           <div style={{
             width:'4px', height:'8px', borderRadius:'2px',
-            background:'linear-gradient(180deg,#7C3AED,#DB2777)',
+            background:`linear-gradient(180deg,${t.pairs.purple.color},${t.pairs.pink.color})`,
             animation:'scroll-bounce 1.8s ease-in-out infinite',
+            boxShadow: t.isDark ? `0 0 6px ${t.pairs.purple.color}` : 'none',
           }} />
         </div>
       </div>
