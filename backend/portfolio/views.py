@@ -10,6 +10,9 @@ class ProjectViewSet(viewsets.ReadOnlyModelViewSet):
     serializer_class = ProjectSerializer
     filterset_fields = ['category', 'is_featured']
 
+    def get_serializer_context(self):
+        return {**super().get_serializer_context(), 'request': self.request}
+
 
 class SkillViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = Skill.objects.all()

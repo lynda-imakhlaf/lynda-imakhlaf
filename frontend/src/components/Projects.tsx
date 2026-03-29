@@ -7,21 +7,21 @@ type Cat = 'all' | 'web' | '3d' | 'game'
 
 // Static enrichment not stored in DB (display-only)
 const ENRICHMENT: Record<string, { emoji: string; impact: string }> = {
-  'E-Commerce Platform':  { emoji: '🛒', impact: '10k+ produits'     },
-  'Système ERP':          { emoji: '📊', impact: '50+ utilisateurs'  },
-  'Jeu Unity 3D':         { emoji: '🎮', impact: 'Indie · Shipped'   },
-  '3D Product Viewer':    { emoji: '🦋', impact: 'Web · Interactive' },
-  'App Immobilière':      { emoji: '🏠', impact: 'Production · Live' },
-  'Pack Personnages 3D':  { emoji: '🎨', impact: '3D Assets'         },
+  'Lune Déco':                          { emoji: '🛒', impact: 'E-Commerce · Live'      },
+  'Iksir — ERP Datamaster':             { emoji: '📊', impact: '50+ utilisateurs'       },
+  'Orientation MI — Jeu Universitaire': { emoji: '🎓', impact: 'Université · Shipped'   },
+  'Pirate Blocks — Hizan Game':         { emoji: '🎮', impact: 'Android · Startup'      },
+  'Portfolio — Lynda Imakhlaf':         { emoji: '🦋', impact: 'Ce site · Live'         },
+  '3D Artstation':                      { emoji: '🎨', impact: '3D · Artstation'        },
 }
 
 const FALLBACK: ApiProject[] = [
-  { id:1, title:'E-Commerce Platform',  description:"Boutique complète avec React, Django, Stripe et gestion d'inventaire en temps réel.", category:'web',  tags:['React','Django','PostgreSQL','Stripe','Docker'], accent_color:'#A855F7', year:2024, is_featured:true,  order:1, thumbnail:null, demo_url:'', github_url:'' },
-  { id:2, title:'Système ERP',          description:'RH, inventaire, comptabilité, reporting. Architecture modulaire pour une entreprise de fabrication.',       category:'web',  tags:['React','Django','PostgreSQL','Charts.js'],         accent_color:'#38BDF8', year:2023, is_featured:true,  order:2, thumbnail:null, demo_url:'', github_url:'' },
-  { id:3, title:'Jeu Unity 3D',         description:'Monde immersif Unity avec personnages Blender, shaders custom et physique avancée.',                        category:'game', tags:['Unity','C#','Blender','Animation'],                accent_color:'#FB923C', year:2023, is_featured:true,  order:3, thumbnail:null, demo_url:'', github_url:'' },
-  { id:4, title:'3D Product Viewer',    description:'Visualiseur Three.js interactif : matériaux, éclairage HDR, rotations — dans le navigateur.',              category:'3d',   tags:['Three.js','React','WebGL','GLTF'],                 accent_color:'#F472B6', year:2024, is_featured:false, order:4, thumbnail:null, demo_url:'', github_url:'' },
-  { id:5, title:'App Immobilière',      description:'Filtres avancés, carte Leaflet, visites virtuelles, dashboard admin complet.',                              category:'web',  tags:['React','Django','Leaflet','PostgreSQL'],           accent_color:'#4ADE80', year:2024, is_featured:true,  order:5, thumbnail:null, demo_url:'', github_url:'' },
-  { id:6, title:'Pack Personnages 3D',  description:'Personnages riggés et animés dans Blender, exportés pour Unity et Unreal Engine.',                          category:'3d',   tags:['Blender','Rigging','Animation','FBX'],             accent_color:'#FBBF24', year:2023, is_featured:false, order:6, thumbnail:null, demo_url:'', github_url:'' },
+  { id:1, title:'Lune Déco',                          description:"Site e-commerce complet avec espace client et panel admin intégré — gestion des commandes, produits, stocks et livraisons.",                                        category:'web',  tags:['React','Django','PostgreSQL','Stripe','Docker'],          accent_color:'#A855F7', year:2024, is_featured:true,  order:1, thumbnail:null, demo_url:'', github_url:'' },
+  { id:2, title:'Iksir — ERP Datamaster',             description:"ERP de gestion de magasins développé en équipe pour l'entreprise Datamaster. Modules RH, inventaire, comptabilité et reporting.",                                  category:'web',  tags:['React','Django','PostgreSQL','Charts.js'],                accent_color:'#38BDF8', year:2023, is_featured:true,  order:2, thumbnail:null, demo_url:'', github_url:'' },
+  { id:3, title:'Orientation MI — Jeu Universitaire', description:"Jeu Unity se déroulant dans mon université pour aider les étudiants de 1ère année à découvrir la branche MI (Maths & Informatique) de façon interactive.", category:'game', tags:['Unity','C#','Blender','Animation'],            accent_color:'#FB923C', year:2023, is_featured:true,  order:3, thumbnail:null, demo_url:'', github_url:'' },
+  { id:4, title:'Pirate Blocks — Hizan Game',        description:"Jeu mobile Android de blocs réalisé avec la startup Hizan Game. Mécaniques de puzzle addictives, niveaux progressifs et interface soignée.",                  category:'game', tags:['Android','Unity','C#','Mobile'],              accent_color:'#F472B6', year:2024, is_featured:true,  order:4, thumbnail:null, demo_url:'', github_url:'' },
+  { id:5, title:'Portfolio — Lynda Imakhlaf',        description:"Mon portfolio personnel — design dark/light, animations 3D Three.js, API Django REST, thème papillon. Ce site que vous regardez en ce moment.",               category:'web',  tags:['React','Three.js','Django','TypeScript','Vite'], accent_color:'#4ADE80', year:2024, is_featured:true,  order:5, thumbnail:null, demo_url:'', github_url:'' },
+  { id:6, title:'3D Artstation',                     description:"Mes créations 3D personnelles — personnages, maisons, objets — modélisés et texturés dans Blender, partagés sur mon portfolio artistique.",                    category:'3d',   tags:['Blender','Characters','Modélisation','Texturing'], accent_color:'#FBBF24', year:2023, is_featured:false, order:6, thumbnail:null, demo_url:'', github_url:'' },
 ]
 
 function hex2rgba(hex: string, alpha: number) {
@@ -58,7 +58,8 @@ export default function Projects() {
       color:  c,
       bg:     hex2rgba(c, 0.12),
       border: hex2rgba(c, 0.25),
-      gradient: `linear-gradient(135deg, ${hex2rgba(c,0.73)}, ${hex2rgba(c,0.45)})`,
+      gradient:  `linear-gradient(135deg, ${hex2rgba(c,0.73)}, ${hex2rgba(c,0.45)})`,
+      thumbnail: p.thumbnail,
       demoUrl:   p.demo_url,
       githubUrl: p.github_url,
     }
@@ -136,15 +137,20 @@ export default function Projects() {
 
               {/* Banner */}
               <div style={{
-                height:'110px', background: p.gradient,
+                height:'110px',
+                background: p.thumbnail ? 'transparent' : p.gradient,
+                backgroundImage: p.thumbnail ? `url(${p.thumbnail})` :p.gradient,
+                backgroundSize: 'cover', backgroundPosition: 'center',
                 position:'relative', display:'flex', alignItems:'center', justifyContent:'center',
               }}>
-                <div style={{ position:'absolute', inset:0, background:'rgba(0,0,0,0.12)' }} />
-                <span style={{ fontSize:'2.8rem', position:'relative', zIndex:1,
-                  filter:'drop-shadow(0 4px 12px rgba(0,0,0,0.25))',
-                  animation:`float ${3.5 + i*0.4}s ease-in-out infinite ${i*0.3}s` }}>
-                  {p.emoji}
-                </span>
+                <div style={{ position:'absolute', inset:0, background: p.thumbnail ? 'rgba(0,0,0,0.35)' : 'rgba(0,0,0,0.12)' }} />
+                {!p.thumbnail && (
+                  <span style={{ fontSize:'2.8rem', position:'relative', zIndex:1,
+                    filter:'drop-shadow(0 4px 12px rgba(0,0,0,0.25))',
+                    animation:`float ${3.5 + i*0.4}s ease-in-out infinite ${i*0.3}s` }}>
+                    {p.emoji}
+                  </span>
+                )}
                 <span style={{ position:'absolute', top:'12px', left:'14px', zIndex:1,
                   fontFamily:"'Nunito',sans-serif", fontSize:'11px', fontWeight:800,
                   color:'white', background:'rgba(0,0,0,0.3)', backdropFilter:'blur(8px)',
@@ -177,18 +183,47 @@ export default function Projects() {
               {/* Footer */}
               <div style={{ padding:'12px 22px 18px',
                 borderTop:`1px solid rgba(168,85,247,${t.isDark ? '0.1' : '0.08'})`,
-                display:'flex', justifyContent:'space-between', alignItems:'center', flexWrap:'wrap', gap:'8px' }}>
-                <div style={{ display:'flex', flexWrap:'wrap', gap:'5px' }}>
-                  {p.tags.slice(0,3).map(tag => (
-                    <span key={tag} className="tag" style={{ fontSize:'10px', padding:'3px 9px' }}>{tag}</span>
-                  ))}
-                  {p.tags.length > 3 && <span className="tag" style={{ fontSize:'10px', padding:'3px 9px' }}>+{p.tags.length-3}</span>}
+                display:'flex', flexDirection:'column', gap:'10px' }}>
+                <div style={{ display:'flex', justifyContent:'space-between', alignItems:'center', flexWrap:'wrap', gap:'8px' }}>
+                  <div style={{ display:'flex', flexWrap:'wrap', gap:'5px' }}>
+                    {p.tags.slice(0,3).map(tag => (
+                      <span key={tag} className="tag" style={{ fontSize:'10px', padding:'3px 9px' }}>{tag}</span>
+                    ))}
+                    {p.tags.length > 3 && <span className="tag" style={{ fontSize:'10px', padding:'3px 9px' }}>+{p.tags.length-3}</span>}
+                  </div>
+                  <span style={{ fontFamily:"'Nunito',sans-serif", fontSize:'10px', fontWeight:800, color: p.color,
+                    background: p.bg, border:`1px solid ${p.border}`, padding:'3px 10px', borderRadius:'999px', whiteSpace:'nowrap',
+                    boxShadow: t.isDark ? `0 0 8px ${p.color}22` : 'none' }}>
+                    {p.impact}
+                  </span>
                 </div>
-                <span style={{ fontFamily:"'Nunito',sans-serif", fontSize:'10px', fontWeight:800, color: p.color,
-                  background: p.bg, border:`1px solid ${p.border}`, padding:'3px 10px', borderRadius:'999px', whiteSpace:'nowrap',
-                  boxShadow: t.isDark ? `0 0 8px ${p.color}22` : 'none' }}>
-                  {p.impact}
-                </span>
+                {(p.demoUrl || p.githubUrl) && (
+                  <div style={{ display:'flex', gap:'8px' }}>
+                    {p.demoUrl && (
+                      <a href={p.demoUrl} target="_blank" rel="noopener noreferrer" style={{
+                        flex:1, textAlign:'center', padding:'7px', borderRadius:'10px',
+                        fontFamily:"'Nunito',sans-serif", fontSize:'11px', fontWeight:800,
+                        background:`linear-gradient(135deg,${p.color},${p.color}99)`,
+                        color:'white', textDecoration:'none',
+                        boxShadow: t.isDark ? `0 0 12px ${p.color}40` : 'none',
+                        transition:'all 0.2s',
+                      }}>
+                        ↗ Demo
+                      </a>
+                    )}
+                    {p.githubUrl && (
+                      <a href={p.githubUrl} target="_blank" rel="noopener noreferrer" style={{
+                        flex:1, textAlign:'center', padding:'7px', borderRadius:'10px',
+                        fontFamily:"'Nunito',sans-serif", fontSize:'11px', fontWeight:800,
+                        background: t.card, color: t.soft,
+                        border: t.cardBorder, textDecoration:'none',
+                        transition:'all 0.2s',
+                      }}>
+                        ⌥ GitHub
+                      </a>
+                    )}
+                  </div>
+                )}
               </div>
             </div>
           ))}

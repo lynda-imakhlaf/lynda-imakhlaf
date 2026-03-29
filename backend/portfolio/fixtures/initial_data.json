@@ -1,0 +1,204 @@
+[
+  {
+    "model": "portfolio.project",
+    "pk": 1,
+    "fields": {
+      "title": "Lune Déco",
+      "description": "Site e-commerce complet avec espace client et panel admin intégré — gestion des commandes, produits, stocks et livraisons.",
+      "category": "web",
+      "tags": ["React", "Django", "PostgreSQL", "Stripe", "Docker"],
+      "thumbnail": null,
+      "demo_url": "https://lune-deco.vercel.app/",
+      "github_url": "",
+      "accent_color": "#A855F7",
+      "year": 2025,
+      "is_featured": true,
+      "order": 1
+    }
+  },
+  {
+    "model": "portfolio.project",
+    "pk": 2,
+    "fields": {
+      "title": "Iksir — ERP Datamaster",
+      "description": "ERP de gestion de magasins développé en équipe pour l'entreprise Datamaster. Modules RH, inventaire, comptabilité et reporting.",
+      "category": "web",
+      "tags": ["React", "Django", "PostgreSQL", "Charts.js"],
+      "thumbnail": null,
+      "demo_url": "",
+      "github_url": "",
+      "accent_color": "#38BDF8",
+      "year": 2021,
+      "is_featured": true,
+      "order": 2
+    }
+  },
+  {
+    "model": "portfolio.project",
+    "pk": 3,
+    "fields": {
+      "title": "Orientation MI — Jeu Universitaire",
+      "description": "Jeu Unity se déroulant dans mon université pour aider les étudiants de 1ère année à découvrir la branche MI (Maths & Informatique) de façon interactive.",
+      "category": "game",
+      "tags": ["Unity", "C#", "Blender", "Animation"],
+      "thumbnail": null,
+      "demo_url": "",
+      "github_url": "",
+      "accent_color": "#FB923C",
+      "year": 2018,
+      "is_featured": true,
+      "order": 3
+    }
+  },
+  {
+    "model": "portfolio.project",
+    "pk": 4,
+    "fields": {
+      "title": "Pirate Blocks — Hizan Game",
+      "description": "Jeu mobile Android de blocs réalisé avec la startup Hizan Game. Mécaniques de puzzle addictives, niveaux progressifs et interface soignée.",
+      "category": "game",
+      "tags": ["Android", "Unity", "C#", "Mobile"],
+      "thumbnail": null,
+      "demo_url": "",
+      "github_url": "",
+      "accent_color": "#F472B6",
+      "year": 2023,
+      "is_featured": true,
+      "order": 4
+    }
+  },
+  {
+    "model": "portfolio.project",
+    "pk": 5,
+    "fields": {
+      "title": "Portfolio — Lynda Imakhlaf",
+      "description": "Mon portfolio personnel — design dark/light, animations 3D Three.js, API Django REST, thème papillon. Ce site que vous regardez en ce moment.",
+      "category": "web",
+      "tags": ["React", "Three.js", "Django", "TypeScript", "Vite"],
+      "thumbnail": null,
+      "demo_url": "https://lune-deco.vercel.app/",
+      "github_url": "",
+      "accent_color": "#4ADE80",
+      "year": 2026,
+      "is_featured": true,
+      "order": 5
+    }
+  },
+  {
+    "model": "portfolio.project",
+    "pk": 6,
+    "fields": {
+      "title": "3D Artstation",
+      "description": "Mes créations 3D personnelles — personnages, maisons, objets — modélisés et texturés dans Blender, partagés sur mon portfolio artistique.",
+      "category": "3d",
+      "tags": ["Blender", "Characters", "Modélisation", "Texturing"],
+      "thumbnail": null,
+      "demo_url": "",
+      "github_url": "",
+      "accent_color": "#FBBF24",
+      "year": 2019,
+      "is_featured": false,
+      "order": 6
+    }
+  },
+  {
+    "model": "portfolio.skill",
+    "pk": 1,
+    "fields": { "name": "React",        "category": "frontend", "level": 95, "color": "#38BDF8", "icon": "", "order": 1 }
+  },
+  {
+    "model": "portfolio.skill",
+    "pk": 2,
+    "fields": { "name": "TypeScript",   "category": "frontend", "level": 88, "color": "#38BDF8", "icon": "", "order": 2 }
+  },
+  {
+    "model": "portfolio.skill",
+    "pk": 3,
+    "fields": { "name": "Three.js",     "category": "frontend", "level": 80, "color": "#38BDF8", "icon": "", "order": 3 }
+  },
+  {
+    "model": "portfolio.skill",
+    "pk": 4,
+    "fields": { "name": "JavaScript",   "category": "frontend", "level": 95, "color": "#38BDF8", "icon": "", "order": 4 }
+  },
+  {
+    "model": "portfolio.skill",
+    "pk": 5,
+    "fields": { "name": "Vite",         "category": "frontend", "level": 85, "color": "#38BDF8", "icon": "", "order": 5 }
+  },
+  {
+    "model": "portfolio.skill",
+    "pk": 6,
+    "fields": { "name": "Django / DRF", "category": "backend",  "level": 92, "color": "#4ADE80", "icon": "", "order": 1 }
+  },
+  {
+    "model": "portfolio.skill",
+    "pk": 7,
+    "fields": { "name": "Python",       "category": "backend",  "level": 90, "color": "#4ADE80", "icon": "", "order": 2 }
+  },
+  {
+    "model": "portfolio.skill",
+    "pk": 8,
+    "fields": { "name": "MySQL / PG",   "category": "backend",  "level": 86, "color": "#4ADE80", "icon": "", "order": 3 }
+  },
+  {
+    "model": "portfolio.skill",
+    "pk": 9,
+    "fields": { "name": "REST APIs",    "category": "backend",  "level": 93, "color": "#4ADE80", "icon": "", "order": 4 }
+  },
+  {
+    "model": "portfolio.skill",
+    "pk": 10,
+    "fields": { "name": "Docker",       "category": "backend",  "level": 78, "color": "#4ADE80", "icon": "", "order": 5 }
+  },
+  {
+    "model": "portfolio.skill",
+    "pk": 11,
+    "fields": { "name": "Blender",      "category": "creative", "level": 85, "color": "#FB923C", "icon": "", "order": 1 }
+  },
+  {
+    "model": "portfolio.skill",
+    "pk": 12,
+    "fields": { "name": "Unity",        "category": "creative", "level": 82, "color": "#FB923C", "icon": "", "order": 2 }
+  },
+  {
+    "model": "portfolio.skill",
+    "pk": 13,
+    "fields": { "name": "C#",           "category": "creative", "level": 78, "color": "#FB923C", "icon": "", "order": 3 }
+  },
+  {
+    "model": "portfolio.skill",
+    "pk": 14,
+    "fields": { "name": "Animation",    "category": "creative", "level": 80, "color": "#FB923C", "icon": "", "order": 4 }
+  },
+  {
+    "model": "portfolio.skill",
+    "pk": 15,
+    "fields": { "name": "C++",          "category": "creative", "level": 70, "color": "#FB923C", "icon": "", "order": 5 }
+  },
+  {
+    "model": "portfolio.skill",
+    "pk": 16,
+    "fields": { "name": "Git / GitHub", "category": "tools",    "level": 93, "color": "#F472B6", "icon": "", "order": 1 }
+  },
+  {
+    "model": "portfolio.skill",
+    "pk": 17,
+    "fields": { "name": "Figma",        "category": "tools",    "level": 82, "color": "#F472B6", "icon": "", "order": 2 }
+  },
+  {
+    "model": "portfolio.skill",
+    "pk": 18,
+    "fields": { "name": "Postman",      "category": "tools",    "level": 88, "color": "#F472B6", "icon": "", "order": 3 }
+  },
+  {
+    "model": "portfolio.skill",
+    "pk": 19,
+    "fields": { "name": "Linux",        "category": "tools",    "level": 80, "color": "#F472B6", "icon": "", "order": 4 }
+  },
+  {
+    "model": "portfolio.skill",
+    "pk": 20,
+    "fields": { "name": "CI/CD",        "category": "tools",    "level": 72, "color": "#F472B6", "icon": "", "order": 5 }
+  }
+]
