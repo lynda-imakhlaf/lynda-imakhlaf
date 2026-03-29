@@ -1,76 +1,55 @@
 import { Link } from 'react-scroll'
 
 export default function Footer() {
-  const year = new Date().getFullYear()
-
   return (
     <footer style={{
-      padding: '40px 24px 32px',
-      borderTop: '1px solid rgba(168, 85, 247, 0.1)',
-      background: '#0d0221',
-      position: 'relative',
+      padding:'32px 28px', background:'white',
+      borderTop:'1.5px solid rgba(26,22,48,0.08)',
     }}>
-      <style>{`
-        .footer-link {
-          font-family: 'JetBrains Mono', monospace;
-          font-size: 12px;
-          color: #7c6fa0;
-          cursor: pointer;
-          transition: color 0.2s;
-          text-decoration: none;
-        }
-        .footer-link:hover { color: #a855f7; }
-      `}</style>
-
       <div style={{
-        maxWidth: '1200px',
-        margin: '0 auto',
-        display: 'flex',
-        flexWrap: 'wrap',
-        alignItems: 'center',
-        justifyContent: 'space-between',
-        gap: '16px',
+        maxWidth:'1100px', margin:'0 auto',
+        display:'flex', flexWrap:'wrap',
+        alignItems:'center', justifyContent:'space-between', gap:'16px',
       }}>
-        {/* Logo */}
-        <Link to="hero" smooth duration={600} style={{ cursor: 'pointer' }}>
-          <span style={{
-            fontFamily: "'JetBrains Mono', monospace",
-            fontSize: '1.2rem',
-            fontWeight: 700,
-            color: '#a855f7',
-          }}>
-            LI<span style={{ color: '#6e00ff' }}>_</span>
-          </span>
+        <Link to="hero" smooth duration={800} style={{ cursor:'pointer' }}>
+          <div style={{ display:'flex', alignItems:'center', gap:'10px' }}>
+            <div style={{
+              width:'28px', height:'28px', borderRadius:'8px',
+              background:'linear-gradient(135deg,#FF2D78,#8B5CF6)',
+              display:'flex', alignItems:'center', justifyContent:'center',
+              fontFamily:"'JetBrains Mono',monospace", fontWeight:900,
+              fontSize:'11px', color:'white',
+            }}>
+              LI
+            </div>
+            <span style={{ fontFamily:"'JetBrains Mono',monospace",
+              fontSize:'0.9rem', fontWeight:800, color:'#1A1630' }}>
+              lynda<span style={{
+                background:'linear-gradient(135deg,#FF2D78,#8B5CF6)',
+                WebkitBackgroundClip:'text', WebkitTextFillColor:'transparent', backgroundClip:'text',
+              }}>.</span>
+            </span>
+          </div>
         </Link>
 
-        {/* Copyright */}
-        <p style={{
-          fontFamily: "'JetBrains Mono', monospace",
-          fontSize: '12px',
-          color: '#4a3a64',
-          textAlign: 'center',
-        }}>
-          © {year} Lynda Imakhlaf — Built with React + Three.js + Django
+        <p style={{ fontFamily:"'JetBrains Mono',monospace", fontSize:'11px',
+          color:'#9B99B0', textAlign:'center' }}>
+          © {new Date().getFullYear()} Lynda Imakhlaf — React · Three.js · Django
         </p>
 
-        {/* Back to top */}
-        <Link to="hero" smooth duration={800} style={{ cursor: 'pointer' }}>
-          <div style={{
-            display: 'flex',
-            alignItems: 'center',
-            gap: '6px',
-            fontFamily: "'JetBrains Mono', monospace",
-            fontSize: '12px',
-            color: '#7c6fa0',
-            transition: 'color 0.2s',
-          }}
-          onMouseEnter={e => (e.currentTarget.style.color = '#a855f7')}
-          onMouseLeave={e => (e.currentTarget.style.color = '#7c6fa0')}
+        <Link to="hero" smooth duration={900} style={{ cursor:'pointer' }}>
+          <div
+            style={{
+              display:'flex', alignItems:'center', gap:'6px',
+              fontFamily:"'JetBrains Mono',monospace", fontSize:'11px',
+              color:'#9B99B0', transition:'all 0.25s', padding:'7px 14px',
+              borderRadius:'999px', border:'1.5px solid rgba(26,22,48,0.1)',
+              background:'white',
+            } as React.CSSProperties}
+            onMouseEnter={e=>{ const el=e.currentTarget as HTMLDivElement; el.style.color='#8B5CF6'; el.style.borderColor='rgba(139,92,246,0.4)'; el.style.background='#F5F3FF'; }}
+            onMouseLeave={e=>{ const el=e.currentTarget as HTMLDivElement; el.style.color='#9B99B0'; el.style.borderColor='rgba(26,22,48,0.1)'; el.style.background='white'; }}
           >
-            Back to top
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-              <path d="M12 19V5M5 12l7-7 7 7"/>
-            </svg>
+            ↑ Haut de page
           </div>
         </Link>
       </div>

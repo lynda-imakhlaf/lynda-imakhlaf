@@ -1,218 +1,147 @@
 import { useState, useEffect } from 'react'
 import { Link } from 'react-scroll'
 
-const NAV_LINKS = [
-  { label: 'About', to: 'about' },
-  { label: 'Skills', to: 'skills' },
+const NAV = [
+  { label: 'About',    to: 'about'    },
+  { label: 'Skills',   to: 'skills'   },
   { label: 'Projects', to: 'projects' },
-  { label: 'Contact', to: 'contact' },
+  { label: 'Contact',  to: 'contact'  },
 ]
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false)
-  const [menuOpen, setMenuOpen] = useState(false)
+  const [open, setOpen] = useState(false)
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 60)
-    window.addEventListener('scroll', onScroll)
-    return () => window.removeEventListener('scroll', onScroll)
+    const fn = () => setScrolled(window.scrollY > 50)
+    window.addEventListener('scroll', fn)
+    return () => window.removeEventListener('scroll', fn)
   }, [])
 
   return (
     <>
       <style>{`
         .nav-link {
-          font-family: 'JetBrains Mono', monospace;
-          font-size: 13px;
-          font-weight: 500;
-          color: #c4b5fd;
-          cursor: pointer;
-          padding: 6px 4px;
-          position: relative;
-          transition: color 0.2s ease;
-          letter-spacing: 0.5px;
-          text-decoration: none;
+          font-family:'JetBrains Mono',monospace; font-size:13px; font-weight:600;
+          color:#5A5878; cursor:pointer; padding:8px 14px; border-radius:10px;
+          transition:all 0.22s; text-decoration:none; white-space:nowrap;
         }
-        .nav-link::after {
-          content: '';
-          position: absolute;
-          bottom: 0;
-          left: 0;
-          width: 0%;
-          height: 1.5px;
-          background: linear-gradient(90deg, #6e00ff, #a855f7);
-          transition: width 0.25s ease;
+        .nav-link:hover { color:#1A1630; background:rgba(139,92,246,0.08); }
+
+        .nav-hire {
+          font-family:'JetBrains Mono',monospace; font-size:12px; font-weight:700;
+          padding:9px 22px; border-radius:999px;
+          background:linear-gradient(135deg,#FF2D78,#8B5CF6);
+          color:white; border:none; cursor:pointer;
+          box-shadow:0 4px 14px rgba(255,45,120,0.35);
+          transition:all 0.25s; text-decoration:none; display:inline-block;
         }
-        .nav-link:hover {
-          color: #ffffff;
+        .nav-hire:hover { transform:translateY(-2px) scale(1.03); box-shadow:0 6px 22px rgba(255,45,120,0.45); color:white; }
+
+        .mob-link {
+          font-family:'JetBrains Mono',monospace; font-size:1rem; font-weight:700;
+          color:#5A5878; padding:15px 0; cursor:pointer;
+          border-bottom:1px solid rgba(26,22,48,0.06);
+          transition:color 0.2s; display:block; text-decoration:none;
         }
-        .nav-link:hover::after {
-          width: 100%;
+        .mob-link:hover { color:#1A1630; }
+        .ham-bar {
+          display:block; width:20px; height:2px;
+          background:#1A1630; border-radius:1px; transition:all 0.28s;
         }
-        .hamburger-line {
-          display: block;
-          width: 22px;
-          height: 2px;
-          background: #a855f7;
-          border-radius: 1px;
-          transition: all 0.3s ease;
-          transform-origin: center;
-        }
-        .mobile-nav-link {
-          font-family: 'JetBrains Mono', monospace;
-          font-size: 1.1rem;
-          font-weight: 600;
-          color: #c4b5fd;
-          cursor: pointer;
-          padding: 12px 0;
-          border-bottom: 1px solid rgba(168, 85, 247, 0.1);
-          transition: color 0.2s;
-          text-decoration: none;
-        }
-        .mobile-nav-link:hover { color: #fff; }
       `}</style>
 
       <nav style={{
-        position: 'fixed',
-        top: 0,
-        left: 0,
-        right: 0,
-        zIndex: 1000,
-        padding: '0 24px',
-        height: '64px',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'space-between',
-        background: scrolled
-          ? 'rgba(13, 2, 33, 0.92)'
-          : 'transparent',
-        backdropFilter: scrolled ? 'blur(16px)' : 'none',
-        borderBottom: scrolled
-          ? '1px solid rgba(168, 85, 247, 0.12)'
-          : '1px solid transparent',
-        transition: 'all 0.4s ease',
-        maxWidth: '100vw',
+        position:'fixed', top:0, left:0, right:0, zIndex:1000,
+        height:'62px', display:'flex', alignItems:'center',
+        justifyContent:'space-between', padding:'0 28px',
+        background: scrolled ? 'rgba(246,244,255,0.92)' : 'transparent',
+        backdropFilter: scrolled ? 'blur(20px)' : 'none',
+        borderBottom: scrolled ? '1px solid rgba(26,22,48,0.08)' : 'none',
+        boxShadow: scrolled ? '0 2px 20px rgba(26,22,48,0.06)' : 'none',
+        transition:'all 0.35s ease',
       }}>
 
         {/* Logo */}
-        <Link to="hero" smooth duration={600} style={{ cursor: 'pointer' }}>
-          <span style={{
-            fontFamily: "'JetBrains Mono', monospace",
-            fontSize: '1.4rem',
-            fontWeight: 700,
-            color: '#a855f7',
-            letterSpacing: '-0.5px',
-            textShadow: scrolled ? 'none' : '0 0 20px rgba(168,85,247,0.5)',
-          }}>
-            LI<span style={{ color: '#6e00ff' }}>_</span>
-          </span>
+        <Link to="hero" smooth duration={600} style={{ cursor:'pointer' }}>
+          <div style={{ display:'flex', alignItems:'center', gap:'10px' }}>
+            <div style={{
+              width:'32px', height:'32px', borderRadius:'10px',
+              background:'linear-gradient(135deg,#FF2D78,#8B5CF6)',
+              display:'flex', alignItems:'center', justifyContent:'center',
+              fontFamily:"'JetBrains Mono',monospace", fontWeight:900,
+              fontSize:'13px', color:'white',
+              boxShadow:'0 4px 12px rgba(255,45,120,0.3)',
+              flexShrink:0,
+            }}>
+              LI
+            </div>
+            <span style={{
+              fontFamily:"'JetBrains Mono',monospace",
+              fontSize:'0.95rem', fontWeight:800, color:'#1A1630',
+            }}>
+              lynda<span style={{
+                background:'linear-gradient(135deg,#FF2D78,#8B5CF6)',
+                WebkitBackgroundClip:'text', WebkitTextFillColor:'transparent',
+                backgroundClip:'text',
+              }}>.</span>
+            </span>
+          </div>
         </Link>
 
-        {/* Desktop nav */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: '32px' }}
-          className="desktop-nav">
-          {NAV_LINKS.map(link => (
-            <Link
-              key={link.to}
-              to={link.to}
-              smooth
-              duration={600}
-              offset={-64}
-              className="nav-link"
-            >
-              <span style={{ color: 'rgba(168,85,247,0.6)', marginRight: '4px' }}>./</span>
-              {link.label}
+        {/* Desktop */}
+        <div style={{ display:'flex', alignItems:'center', gap:'4px' }} className="d-nav">
+          {NAV.map(({ label, to }) => (
+            <Link key={to} to={to} smooth duration={650} offset={-62} className="nav-link">
+              {label}
             </Link>
           ))}
-          <a
-            href="mailto:imakhlflyndatiane@gmail.com"
-            className="btn btn-outline"
-            style={{
-              padding: '7px 18px',
-              fontSize: '12px',
-              fontFamily: "'JetBrains Mono', monospace",
-              borderRadius: '8px',
-            }}
-          >
-            Hire Me
+          <div style={{ width:'1px', height:'18px', background:'rgba(26,22,48,0.1)', margin:'0 8px' }} />
+          <a href="mailto:imakhlflyndatiane@gmail.com" className="nav-hire">
+            Hire me ✦
           </a>
         </div>
 
         {/* Hamburger */}
-        <button
-          onClick={() => setMenuOpen(!menuOpen)}
-          className="hamburger"
-          style={{
-            background: 'none',
-            border: 'none',
-            cursor: 'pointer',
-            display: 'none',
-            flexDirection: 'column',
-            gap: '5px',
-            padding: '4px',
-          }}
-          aria-label="Menu"
-        >
-          <span className="hamburger-line" style={menuOpen ? { transform: 'rotate(45deg) translate(5px, 5px)' } : {}} />
-          <span className="hamburger-line" style={menuOpen ? { opacity: 0 } : {}} />
-          <span className="hamburger-line" style={menuOpen ? { transform: 'rotate(-45deg) translate(5px, -5px)' } : {}} />
+        <button onClick={() => setOpen(!open)} className="ham-btn"
+          style={{ background:'none', border:'none', cursor:'pointer',
+            display:'none', flexDirection:'column', gap:'5px', padding:'5px' }}>
+          <span className="ham-bar" style={open ? { transform:'rotate(45deg) translate(5px,5px)' } : {}} />
+          <span className="ham-bar" style={open ? { opacity:0 } : {}} />
+          <span className="ham-bar" style={open ? { transform:'rotate(-45deg) translate(5px,-5px)' } : {}} />
         </button>
       </nav>
 
       {/* Mobile menu */}
-      {menuOpen && (
+      {open && (
         <div style={{
-          position: 'fixed',
-          top: '64px',
-          left: 0,
-          right: 0,
-          background: 'rgba(13, 2, 33, 0.98)',
-          backdropFilter: 'blur(20px)',
-          borderBottom: '1px solid rgba(168, 85, 247, 0.15)',
-          padding: '16px 24px 24px',
-          zIndex: 999,
-          display: 'flex',
-          flexDirection: 'column',
+          position:'fixed', top:'62px', left:0, right:0, zIndex:999,
+          background:'rgba(246,244,255,0.98)', backdropFilter:'blur(24px)',
+          borderBottom:'1px solid rgba(26,22,48,0.08)',
+          padding:'8px 28px 24px',
+          boxShadow:'0 8px 32px rgba(26,22,48,0.1)',
         }}>
-          {NAV_LINKS.map(link => (
-            <Link
-              key={link.to}
-              to={link.to}
-              smooth
-              duration={600}
-              offset={-64}
-              className="mobile-nav-link"
-              onClick={() => setMenuOpen(false)}
-            >
-              <span style={{ color: 'rgba(168,85,247,0.6)', marginRight: '8px' }}>./</span>
-              {link.label}
+          {NAV.map(({ label, to }) => (
+            <Link key={to} to={to} smooth duration={650} offset={-62}
+              className="mob-link" onClick={() => setOpen(false)}>
+              {label}
             </Link>
           ))}
-          <a
-            href="mailto:imakhlflyndatiane@gmail.com"
+          <a href="mailto:imakhlflyndatiane@gmail.com"
             style={{
-              marginTop: '16px',
-              textAlign: 'center',
-              fontFamily: "'JetBrains Mono', monospace",
-              fontSize: '14px',
-              padding: '12px',
-              background: 'linear-gradient(135deg, #6e00ff, #a855f7)',
-              color: 'white',
-              borderRadius: '10px',
-              textDecoration: 'none',
-            }}
-          >
-            Hire Me
+              display:'block', marginTop:'16px', textAlign:'center',
+              background:'linear-gradient(135deg,#FF2D78,#8B5CF6)',
+              color:'white', borderRadius:'999px', padding:'13px',
+              fontFamily:"'JetBrains Mono',monospace", fontSize:'13px', fontWeight:700,
+              boxShadow:'0 4px 16px rgba(255,45,120,0.3)',
+            }}>
+            Hire me ✦
           </a>
         </div>
       )}
 
-      {/* Responsive override */}
       <style>{`
-        @media (max-width: 768px) {
-          .desktop-nav { display: none !important; }
-          .hamburger { display: flex !important; }
-        }
+        @media(max-width:768px){ .d-nav{display:none!important;} .ham-btn{display:flex!important;} }
       `}</style>
     </>
   )

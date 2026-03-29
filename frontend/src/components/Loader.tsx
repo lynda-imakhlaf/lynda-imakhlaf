@@ -1,79 +1,77 @@
 import { useEffect, useState } from 'react'
 
 export default function Loader() {
-  const [progress, setProgress] = useState(0)
+  const [pct, setPct] = useState(0)
 
   useEffect(() => {
-    const interval = setInterval(() => {
-      setProgress(p => {
-        if (p >= 100) { clearInterval(interval); return 100 }
-        return p + Math.random() * 18
-      })
+    const iv = setInterval(() => {
+      setPct(p => { if (p >= 100) { clearInterval(iv); return 100 } return p + Math.random() * 15 })
     }, 120)
-    return () => clearInterval(interval)
+    return () => clearInterval(iv)
   }, [])
+
+  const colors = ['#FF2D78','#FF6B35','#FFBD35','#00C896','#0EA5E9','#8B5CF6']
+  const p = Math.min(pct, 100)
+  const idx = Math.floor((p / 100) * (colors.length - 1))
+  const accentColor = colors[idx]
 
   return (
     <div style={{
-      position: 'fixed',
-      inset: 0,
-      background: '#0d0221',
-      display: 'flex',
-      flexDirection: 'column',
-      alignItems: 'center',
-      justifyContent: 'center',
-      zIndex: 9999,
+      position:'fixed', inset:0,
+      background:'#F6F4FF',
+      display:'flex', flexDirection:'column',
+      alignItems:'center', justifyContent:'center',
+      zIndex:9999, gap:'0',
     }}>
       <style>{`
-        @keyframes loader-glow {
-          0%, 100% { text-shadow: 0 0 20px #a855f7, 0 0 40px #a855f7; }
-          50% { text-shadow: 0 0 40px #a855f7, 0 0 80px #6e00ff; }
-        }
-        @keyframes loader-bar {
-          0% { width: 0%; }
-        }
+        @keyframes spin { to { transform:rotate(360deg); } }
+        @keyframes ld-pop { 0%,100%{transform:scale(1);}50%{transform:scale(1.08);} }
       `}</style>
 
-      {/* Logo */}
+      {/* Spinning rainbow ring */}
       <div style={{
-        fontFamily: "'JetBrains Mono', monospace",
-        fontSize: '2.4rem',
-        fontWeight: 700,
-        color: '#a855f7',
-        marginBottom: '48px',
-        letterSpacing: '-1px',
-        animation: 'loader-glow 2s ease-in-out infinite',
+        width:'64px', height:'64px', borderRadius:'50%', marginBottom:'30px',
+        background:`conic-gradient(from 0deg, #FF2D78, #FF6B35, #FFBD35, #00C896, #0EA5E9, #8B5CF6, #FF2D78)`,
+        animation:'spin 1.2s linear infinite',
+        display:'flex', alignItems:'center', justifyContent:'center',
+        position:'relative',
       }}>
-        LI<span style={{ color: '#6e00ff' }}>_</span>
+        {/* White inner circle */}
+        <div style={{
+          width:'50px', height:'50px', borderRadius:'50%',
+          background:'#F6F4FF',
+          display:'flex', alignItems:'center', justifyContent:'center',
+          fontFamily:"'JetBrains Mono',monospace", fontWeight:900,
+          fontSize:'14px', color:'#1A1630',
+          animation:'ld-pop 1.2s ease-in-out infinite',
+        }}>
+          LI
+        </div>
       </div>
 
-      {/* Progress bar track */}
+      {/* Rainbow progress bar */}
       <div style={{
-        width: '240px',
-        height: '2px',
-        background: 'rgba(168, 85, 247, 0.15)',
-        borderRadius: '1px',
-        overflow: 'hidden',
-        marginBottom: '16px',
+        width:'200px', height:'5px',
+        background:'rgba(26,22,48,0.08)',
+        borderRadius:'3px', overflow:'hidden', marginBottom:'14px',
+        border:'1px solid rgba(26,22,48,0.06)',
       }}>
         <div style={{
-          height: '100%',
-          width: `${Math.min(progress, 100)}%`,
-          background: 'linear-gradient(90deg, #6e00ff, #a855f7)',
-          borderRadius: '1px',
-          transition: 'width 0.12s ease',
-          boxShadow: '0 0 8px #a855f7',
+          height:'100%', borderRadius:'3px',
+          width:`${p}%`,
+          background:'linear-gradient(90deg,#FF2D78,#FF6B35,#FFBD35,#00C896,#0EA5E9,#8B5CF6)',
+          transition:'width 0.12s ease',
+          backgroundSize:'200px 100%',
         }} />
       </div>
 
-      <div style={{
-        fontFamily: "'JetBrains Mono', monospace",
-        fontSize: '12px',
-        color: '#7c6fa0',
-        letterSpacing: '2px',
+      <span style={{
+        fontFamily:"'JetBrains Mono',monospace", fontSize:'11px',
+        color: accentColor, fontWeight:700, letterSpacing:'2px',
+        transition:'color 0.4s ease',
       }}>
-        {Math.min(Math.round(progress), 100)}%
-      </div>
+        {Math.round(p)}%
+      </span>
     </div>
   )
 }
