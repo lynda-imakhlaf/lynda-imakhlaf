@@ -1,0 +1,7 @@
+{
+  "permissions": {
+    "allow": [
+      "Read(//c/Users/DATA/.claude/projects/c--my-project-lynda-imakhlaf/memory/**)"
+    ]
+  }
+}
