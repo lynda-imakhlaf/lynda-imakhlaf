@@ -79,6 +79,12 @@ if config('USE_SQLITE', default=False, cast=bool):
         }
     }
 
+# Production: DATABASE_URL overrides everything (Render/Railway injects this automatically)
+DATABASE_URL = config('DATABASE_URL', default='')
+if DATABASE_URL:
+    import dj_database_url
+    DATABASES = {'default': dj_database_url.parse(DATABASE_URL, conn_max_age=600)}
+
 AUTH_PASSWORD_VALIDATORS = [
     {'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator'},
     {'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator'},
@@ -120,3 +126,4 @@ CORS_ALLOWED_ORIGINS = config(
 ).split(',')
 
 CORS_ALLOW_METHODS = ['GET', 'POST', 'OPTIONS']
+
