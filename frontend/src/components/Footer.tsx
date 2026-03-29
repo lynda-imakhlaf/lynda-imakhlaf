@@ -3,7 +3,7 @@ import { Link } from 'react-scroll'
 export default function Footer() {
   return (
     <footer style={{
-      padding:'32px 28px', background:'white',
+      padding:'32px 28px', background:'rgba(255,255,255,0.6)', backdropFilter:'blur(12px)',
       borderTop:'1.5px solid rgba(26,22,48,0.08)',
     }}>
       <div style={{
@@ -12,24 +12,10 @@ export default function Footer() {
         alignItems:'center', justifyContent:'space-between', gap:'16px',
       }}>
         <Link to="hero" smooth duration={800} style={{ cursor:'pointer' }}>
-          <div style={{ display:'flex', alignItems:'center', gap:'10px' }}>
-            <div style={{
-              width:'28px', height:'28px', borderRadius:'8px',
-              background:'linear-gradient(135deg,#FF2D78,#8B5CF6)',
-              display:'flex', alignItems:'center', justifyContent:'center',
-              fontFamily:"'JetBrains Mono',monospace", fontWeight:900,
-              fontSize:'11px', color:'white',
-            }}>
-              LI
-            </div>
-            <span style={{ fontFamily:"'JetBrains Mono',monospace",
-              fontSize:'0.9rem', fontWeight:800, color:'#1A1630' }}>
-              lynda<span style={{
-                background:'linear-gradient(135deg,#FF2D78,#8B5CF6)',
-                WebkitBackgroundClip:'text', WebkitTextFillColor:'transparent', backgroundClip:'text',
-              }}>.</span>
-            </span>
-          </div>
+          <img src="/lynda-logo.png" alt="Lynda Imakhlaf" style={{
+            height:'34px', objectFit:'contain',
+            filter:'drop-shadow(0 2px 6px rgba(255,45,120,0.2))',
+          }} />
         </Link>
 
         <p style={{ fontFamily:"'JetBrains Mono',monospace", fontSize:'11px',

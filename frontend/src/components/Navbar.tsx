@@ -55,7 +55,7 @@ export default function Navbar() {
         position:'fixed', top:0, left:0, right:0, zIndex:1000,
         height:'62px', display:'flex', alignItems:'center',
         justifyContent:'space-between', padding:'0 28px',
-        background: scrolled ? 'rgba(246,244,255,0.92)' : 'transparent',
+        background: scrolled ? 'rgba(255,255,255,0.55)' : 'transparent',
         backdropFilter: scrolled ? 'blur(20px)' : 'none',
         borderBottom: scrolled ? '1px solid rgba(26,22,48,0.08)' : 'none',
         boxShadow: scrolled ? '0 2px 20px rgba(26,22,48,0.06)' : 'none',
@@ -64,29 +64,10 @@ export default function Navbar() {
 
         {/* Logo */}
         <Link to="hero" smooth duration={600} style={{ cursor:'pointer' }}>
-          <div style={{ display:'flex', alignItems:'center', gap:'10px' }}>
-            <div style={{
-              width:'32px', height:'32px', borderRadius:'10px',
-              background:'linear-gradient(135deg,#FF2D78,#8B5CF6)',
-              display:'flex', alignItems:'center', justifyContent:'center',
-              fontFamily:"'JetBrains Mono',monospace", fontWeight:900,
-              fontSize:'13px', color:'white',
-              boxShadow:'0 4px 12px rgba(255,45,120,0.3)',
-              flexShrink:0,
-            }}>
-              LI
-            </div>
-            <span style={{
-              fontFamily:"'JetBrains Mono',monospace",
-              fontSize:'0.95rem', fontWeight:800, color:'#1A1630',
-            }}>
-              lynda<span style={{
-                background:'linear-gradient(135deg,#FF2D78,#8B5CF6)',
-                WebkitBackgroundClip:'text', WebkitTextFillColor:'transparent',
-                backgroundClip:'text',
-              }}>.</span>
-            </span>
-          </div>
+          <img src="/lynda-logo.png" alt="Lynda Imakhlaf" style={{
+            height:'38px', objectFit:'contain',
+            filter:'drop-shadow(0 2px 8px rgba(255,45,120,0.25))',
+          }} />
         </Link>
 
         {/* Desktop */}

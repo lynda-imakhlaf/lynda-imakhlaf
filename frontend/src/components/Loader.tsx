@@ -10,7 +10,7 @@ export default function Loader() {
     return () => clearInterval(iv)
   }, [])
 
-  const colors = ['#FF2D78','#FF6B35','#FFBD35','#00C896','#0EA5E9','#8B5CF6']
+  const colors = ['#FF2D78','#FF6B35','#8B5CF6']
   const p = Math.min(pct, 100)
   const idx = Math.floor((p / 100) * (colors.length - 1))
   const accentColor = colors[idx]
@@ -28,24 +28,26 @@ export default function Loader() {
         @keyframes ld-pop { 0%,100%{transform:scale(1);}50%{transform:scale(1.08);} }
       `}</style>
 
-      {/* Spinning rainbow ring */}
+      {/* Spinning rainbow ring + papi4 inside */}
       <div style={{
-        width:'64px', height:'64px', borderRadius:'50%', marginBottom:'30px',
-        background:`conic-gradient(from 0deg, #FF2D78, #FF6B35, #FFBD35, #00C896, #0EA5E9, #8B5CF6, #FF2D78)`,
+        width:'90px', height:'90px', borderRadius:'50%', marginBottom:'30px',
+        background:`conic-gradient(from 0deg, #FF2D78, #8B5CF6, #FF2D78)`,
         animation:'spin 1.2s linear infinite',
         display:'flex', alignItems:'center', justifyContent:'center',
         position:'relative',
       }}>
         {/* White inner circle */}
         <div style={{
-          width:'50px', height:'50px', borderRadius:'50%',
+          width:'74px', height:'74px', borderRadius:'50%',
           background:'#F6F4FF',
           display:'flex', alignItems:'center', justifyContent:'center',
-          fontFamily:"'JetBrains Mono',monospace", fontWeight:900,
-          fontSize:'14px', color:'#1A1630',
           animation:'ld-pop 1.2s ease-in-out infinite',
+          overflow:'hidden',
         }}>
-          LI
+          <img src="/papi4.png" alt="" style={{
+            width:'58px', height:'58px', objectFit:'contain',
+            filter:'drop-shadow(0 2px 6px rgba(255,45,120,0.3))',
+          }} />
         </div>
       </div>
 

@@ -20,7 +20,7 @@ export default function About() {
   return (
     <section id="about" ref={ref} style={{
       padding:'100px 0', position:'relative', overflow:'hidden',
-      background:'white',
+      background:'transparent',
     }}>
       {/* Polka dot pattern — subtle */}
       <div style={{

@@ -27,7 +27,7 @@ export default function Contact() {
   return (
     <section id="contact" ref={ref} style={{
       padding:'100px 0', position:'relative', overflow:'hidden',
-      background:'#F6F4FF',
+      background:'transparent',
     }}>
       {/* Polka dots */}
       <div style={{

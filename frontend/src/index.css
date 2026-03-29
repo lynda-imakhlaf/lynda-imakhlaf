@@ -57,7 +57,11 @@
 html { scroll-behavior: smooth; }
 body {
   font-family: var(--sans);
-  background: var(--bg);
+  background-color: #F6F4FF;
+  background-image: url('/bg.jpg');
+  background-size: cover;
+  background-attachment: fixed;
+  background-position: center;
   color: var(--text);
   line-height: 1.6;
   overflow-x: hidden;

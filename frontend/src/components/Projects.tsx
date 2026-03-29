@@ -62,7 +62,7 @@ export default function Projects() {
   const list = active === 'all' ? PROJECTS : PROJECTS.filter(p => p.cat === active)
 
   return (
-    <section id="projects" ref={ref} style={{ padding:'100px 0', position:'relative', background:'white' }}>
+    <section id="projects" ref={ref} style={{ padding:'100px 0', position:'relative', background:'transparent' }}>
 
       <style>{`
         @keyframes pj-in { from{opacity:0;transform:translateY(34px);}to{opacity:1;transform:translateY(0);} }

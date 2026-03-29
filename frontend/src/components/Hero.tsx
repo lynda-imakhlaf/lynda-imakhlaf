@@ -1,228 +1,160 @@
-import { useEffect, useRef } from 'react'
-import * as THREE from 'three'
 import { TypeAnimation } from 'react-type-animation'
 import { Link } from 'react-scroll'
 
+const PAPIS = [
+  {
+    src: '/papi.png',
+    size: 200, top: '8%', right: '32%',
+    anim: 'papi-a', dur: '5s', delay: '0s',
+    halo: 'rgba(255,45,120,0.18)', rotate: '-6deg',
+  },
+  {
+    src: '/papi1.png',
+    size: 155, top: '18%', right: '10%',
+    anim: 'papi-b', dur: '4.2s', delay: '0.7s',
+    halo: 'rgba(139,92,246,0.18)', rotate: '5deg',
+  },
+  {
+    src: '/papi2.png',
+    size: 175, top: '52%', right: '28%',
+    anim: 'papi-c', dur: '6s', delay: '1.3s',
+    halo: 'rgba(14,165,233,0.18)', rotate: '-3deg',
+  },
+  {
+    src: '/papi3.png',
+    size: 135, top: '62%', right: '8%',
+    anim: 'papi-a', dur: '4.8s', delay: '0.4s',
+    halo: 'rgba(0,200,150,0.18)', rotate: '8deg',
+  },
+  {
+    src: '/papi4.png',
+    size: 160, top: '36%', right: '18%',
+    anim: 'papi-b', dur: '5.5s', delay: '1.0s',
+    halo: 'rgba(255,107,53,0.18)', rotate: '-10deg',
+  },
+]
+
 export default function Hero() {
-  const canvasRef = useRef<HTMLCanvasElement>(null)
-  const mouseRef  = useRef({ x: 0, y: 0 })
-
-  useEffect(() => {
-    const canvas = canvasRef.current
-    if (!canvas) return
-
-    const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true })
-    renderer.setSize(window.innerWidth, window.innerHeight)
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
-
-    const scene  = new THREE.Scene()
-    const camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 200)
-    camera.position.set(0, 1.5, 11)
-
-    // Vivid rainbow palette — lighter/more saturated for light bg
-    const palette = [
-      new THREE.Color('#FF2D78'),
-      new THREE.Color('#FF6B35'),
-      new THREE.Color('#FFBD35'),
-      new THREE.Color('#00C896'),
-      new THREE.Color('#0EA5E9'),
-      new THREE.Color('#8B5CF6'),
-    ]
-
-    const N = 7000
-    const pos = new Float32Array(N * 3)
-    const col = new Float32Array(N * 3)
-
-    for (let i = 0; i < N; i++) {
-      const i3     = i * 3
-      const branch = i % 6
-      const r      = Math.pow(Math.random(), 1.5) * 8
-      const angle  = (branch / 6) * Math.PI * 2 + r * 1.2
-      const s      = 0.2 + (r / 8) * 0.5
-
-      pos[i3]     = Math.cos(angle) * r + (Math.random()-0.5) * s * r * 0.55
-      pos[i3 + 1] = (Math.random()-0.5) * s * r * 0.18
-      pos[i3 + 2] = Math.sin(angle) * r + (Math.random()-0.5) * s * r * 0.55
-
-      const c = palette[branch].clone()
-      c.lerp(palette[(branch + 1) % 6], Math.random() * 0.3)
-      // On a light bg, particles need to be bright/saturated
-      c.multiplyScalar(0.85 + (1 - r/8) * 0.2)
-      col[i3]=c.r; col[i3+1]=c.g; col[i3+2]=c.b
-    }
-
-    const geo = new THREE.BufferGeometry()
-    geo.setAttribute('position', new THREE.BufferAttribute(pos, 3))
-    geo.setAttribute('color',    new THREE.BufferAttribute(col, 3))
-    const mat = new THREE.PointsMaterial({
-      size: 0.065, sizeAttenuation: true, depthWrite: false,
-      blending: THREE.NormalBlending, vertexColors: true,
-      transparent: true, opacity: 0.75,
-    })
-    const galaxy = new THREE.Points(geo, mat)
-    scene.add(galaxy)
-
-    const onMouse = (e: MouseEvent) => {
-      mouseRef.current.x = (e.clientX / window.innerWidth  - 0.5) * 2
-      mouseRef.current.y = -(e.clientY / window.innerHeight - 0.5) * 2
-    }
-    window.addEventListener('mousemove', onMouse)
-
-    let raf: number
-    const clock = new THREE.Clock()
-    const tick = () => {
-      raf = requestAnimationFrame(tick)
-      const t = clock.getElapsedTime()
-      galaxy.rotation.y = t * 0.055
-      galaxy.rotation.x = Math.sin(t * 0.1) * 0.05
-      camera.position.x += (mouseRef.current.x * 1.2 - camera.position.x) * 0.02
-      camera.position.y += (mouseRef.current.y * 0.7 + 1.5 - camera.position.y) * 0.02
-      camera.lookAt(0, 0, 0)
-      renderer.render(scene, camera)
-    }
-    tick()
-
-    const onResize = () => {
-      camera.aspect = window.innerWidth / window.innerHeight
-      camera.updateProjectionMatrix()
-      renderer.setSize(window.innerWidth, window.innerHeight)
-    }
-    window.addEventListener('resize', onResize)
-    return () => {
-      cancelAnimationFrame(raf)
-      window.removeEventListener('mousemove', onMouse)
-      window.removeEventListener('resize', onResize)
-      renderer.dispose(); geo.dispose(); mat.dispose()
-    }
-  }, [])
-
   return (
     <section id="hero" style={{
-      position:'relative', height:'100vh', display:'flex',
-      alignItems:'center', overflow:'hidden', padding:0,
-      background:'linear-gradient(135deg, #F6F4FF 0%, #FFF5F8 40%, #F0F9FF 100%)',
+      position: 'relative', height: '100vh', display: 'flex',
+      alignItems: 'center', overflow: 'hidden', padding: 0,
+      background: 'transparent',
     }}>
 
-      {/* Canvas — behind everything */}
-      <canvas ref={canvasRef} style={{
-        position:'absolute', inset:0, width:'100%', height:'100%', zIndex:0,
-      }} />
+      <style>{`
+        @keyframes papi-a {
+          0%,100% { transform: translateY(0px) rotate(var(--rot)); }
+          40%     { transform: translateY(-22px) rotate(calc(var(--rot) + 4deg)); }
+          70%     { transform: translateY(-10px) rotate(calc(var(--rot) - 2deg)); }
+        }
+        @keyframes papi-b {
+          0%,100% { transform: translateY(0px) rotate(var(--rot)); }
+          35%     { transform: translateY(-18px) rotate(calc(var(--rot) - 5deg)); }
+          65%     { transform: translateY(-8px)  rotate(calc(var(--rot) + 3deg)); }
+        }
+        @keyframes papi-c {
+          0%,100% { transform: translateY(0px) rotate(var(--rot)) scale(1); }
+          50%     { transform: translateY(-26px) rotate(calc(var(--rot) + 2deg)) scale(1.04); }
+        }
+        @keyframes hero-slide {
+          from { opacity:0; transform:translateX(-36px); }
+          to   { opacity:1; transform:translateX(0); }
+        }
+        @keyframes badge-pop {
+          0%,100%{ transform:translateY(0) scale(1); }
+          50%{ transform:translateY(-5px) scale(1.03); }
+        }
+        @keyframes scroll-bounce {
+          0%,100%{ transform:translateY(0); opacity:0.5; }
+          50%{ transform:translateY(8px); opacity:1; }
+        }
+        .hl { animation:hero-slide 0.7s ease forwards; opacity:0; }
+        .hl:nth-child(1){ animation-delay:0.05s; }
+        .hl:nth-child(2){ animation-delay:0.2s; }
+        .hl:nth-child(3){ animation-delay:0.35s; }
+        .hl:nth-child(4){ animation-delay:0.5s; }
+        .hl:nth-child(5){ animation-delay:0.65s; }
+        .hl:nth-child(6){ animation-delay:0.8s; }
+        .hl:nth-child(7){ animation-delay:0.95s; }
+        .h-btn-main {
+          display:inline-flex; align-items:center; gap:8px;
+          padding:15px 34px; border-radius:999px;
+          background:linear-gradient(135deg,#FF2D78,#8B5CF6);
+          color:white; font-family:'JetBrains Mono',monospace;
+          font-size:14px; font-weight:700; border:none; cursor:pointer;
+          box-shadow:0 6px 24px rgba(255,45,120,0.4);
+          transition:all 0.3s; text-decoration:none;
+        }
+        .h-btn-main:hover { transform:translateY(-4px) scale(1.03); box-shadow:0 12px 36px rgba(255,45,120,0.5); color:white; }
+        .h-btn-ghost {
+          display:inline-flex; align-items:center; gap:8px;
+          padding:14px 32px; border-radius:999px;
+          background:white; color:#1A1630;
+          font-family:'JetBrains Mono',monospace; font-size:14px; font-weight:700;
+          border:2px solid rgba(26,22,48,0.12); cursor:pointer; transition:all 0.3s;
+          box-shadow:0 2px 12px rgba(26,22,48,0.08); text-decoration:none;
+        }
+        .h-btn-ghost:hover { border-color:#8B5CF6; color:#8B5CF6; transform:translateY(-4px); box-shadow:0 8px 28px rgba(139,92,246,0.2); }
+        .soc {
+          width:42px; height:42px; border-radius:12px;
+          display:flex; align-items:center; justify-content:center;
+          background:white; color:#5A5878;
+          border:1.5px solid rgba(26,22,48,0.1);
+          box-shadow:0 2px 8px rgba(26,22,48,0.08);
+          transition:all 0.25s; text-decoration:none;
+        }
+        .soc:hover { background:#8B5CF6; color:white; border-color:#8B5CF6; transform:translateY(-4px) rotate(-5deg); box-shadow:0 8px 20px rgba(139,92,246,0.35); }
+        .papi-wrap {
+          position:absolute;
+          pointer-events:none;
+          display:flex; align-items:center; justify-content:center;
+        }
+        .papi-wrap img {
+          display:block;
+          filter: drop-shadow(0 16px 32px rgba(26,22,48,0.18));
+          width:100%; height:100%; object-fit:contain;
+        }
+      `}</style>
 
-      {/* Colorful blobs — decorative */}
+      {/* ── Decorative blobs ── */}
       <div style={{ position:'absolute', top:'-80px', right:'-60px', width:'500px', height:'500px',
-        borderRadius:'50%', pointerEvents:'none', zIndex:1,
-        background:'radial-gradient(circle, rgba(139,92,246,0.12) 0%, transparent 65%)' }} />
+        borderRadius:'50%', pointerEvents:'none', zIndex:0,
+        background:'radial-gradient(circle, rgba(139,92,246,0.1) 0%, transparent 65%)' }} />
       <div style={{ position:'absolute', bottom:'-60px', left:'-40px', width:'400px', height:'400px',
-        borderRadius:'50%', pointerEvents:'none', zIndex:1,
-        background:'radial-gradient(circle, rgba(255,45,120,0.1) 0%, transparent 65%)' }} />
-      <div style={{ position:'absolute', top:'30%', right:'15%', width:'300px', height:'300px',
-        borderRadius:'50%', pointerEvents:'none', zIndex:1,
-        background:'radial-gradient(circle, rgba(14,165,233,0.08) 0%, transparent 65%)' }} />
+        borderRadius:'50%', pointerEvents:'none', zIndex:0,
+        background:'radial-gradient(circle, rgba(255,45,120,0.08) 0%, transparent 65%)' }} />
 
-      {/* Bottom fade to next section */}
+      {/* ── Papi images (unique, CSS-animated) ── */}
+      {PAPIS.map((p, i) => (
+        <div key={i} className="papi-wrap" style={{
+          top: p.top, right: p.right,
+          width: p.size, height: p.size,
+          zIndex: 1,
+          ['--rot' as string]: p.rotate,
+          animation: `${p.anim} ${p.dur} ease-in-out infinite`,
+          animationDelay: p.delay,
+        }}>
+          {/* colored halo behind the image */}
+          <div style={{
+            position:'absolute', inset:'-20%',
+            borderRadius:'50%',
+            background: `radial-gradient(circle, ${p.halo} 0%, transparent 70%)`,
+          }} />
+          <img src={p.src} alt="" />
+        </div>
+      ))}
+
+      {/* ── Bottom fade ── */}
       <div style={{
         position:'absolute', bottom:0, left:0, right:0, height:'200px',
-        background:'linear-gradient(to bottom, transparent, #F6F4FF)',
+        background:'linear-gradient(to bottom, transparent, rgba(246,244,255,0.6))',
         zIndex:2, pointerEvents:'none',
       }} />
 
-      {/* ===== CONTENT — ASYMMETRIC LEFT ===== */}
+      {/* ── Content ── */}
       <div style={{ position:'relative', zIndex:3, width:'100%', padding:'0 28px' }}>
         <div style={{ maxWidth:'1100px', margin:'0 auto' }}>
-
-          <style>{`
-            @keyframes hero-slide {
-              from { opacity:0; transform:translateX(-36px); }
-              to   { opacity:1; transform:translateX(0); }
-            }
-            .hl { animation:hero-slide 0.7s ease forwards; opacity:0; }
-            .hl:nth-child(1){ animation-delay:0.05s; }
-            .hl:nth-child(2){ animation-delay:0.2s; }
-            .hl:nth-child(3){ animation-delay:0.35s; }
-            .hl:nth-child(4){ animation-delay:0.5s; }
-            .hl:nth-child(5){ animation-delay:0.65s; }
-            .hl:nth-child(6){ animation-delay:0.8s; }
-            .hl:nth-child(7){ animation-delay:0.95s; }
-
-            @keyframes badge-pop {
-              0%,100%{ transform:translateY(0) scale(1); }
-              50%{ transform:translateY(-5px) scale(1.03); }
-            }
-
-            .h-btn-main {
-              display:inline-flex; align-items:center; gap:8px;
-              padding:15px 34px; border-radius:999px;
-              background:linear-gradient(135deg,#FF2D78,#8B5CF6);
-              color:white; font-family:'JetBrains Mono',monospace;
-              font-size:14px; font-weight:700; border:none; cursor:pointer;
-              box-shadow:0 6px 24px rgba(255,45,120,0.4);
-              transition:all 0.3s; text-decoration:none;
-            }
-            .h-btn-main:hover {
-              transform:translateY(-4px) scale(1.03);
-              box-shadow:0 12px 36px rgba(255,45,120,0.5); color:white;
-            }
-            .h-btn-ghost {
-              display:inline-flex; align-items:center; gap:8px;
-              padding:14px 32px; border-radius:999px;
-              background:white; color:#1A1630;
-              font-family:'JetBrains Mono',monospace;
-              font-size:14px; font-weight:700;
-              border:2px solid rgba(26,22,48,0.12);
-              cursor:pointer; transition:all 0.3s;
-              box-shadow:0 2px 12px rgba(26,22,48,0.08);
-              text-decoration:none;
-            }
-            .h-btn-ghost:hover {
-              border-color:#8B5CF6; color:#8B5CF6;
-              transform:translateY(-4px);
-              box-shadow:0 8px 28px rgba(139,92,246,0.2);
-            }
-            .soc {
-              width:42px; height:42px; border-radius:12px;
-              display:flex; align-items:center; justify-content:center;
-              background:white; color:#5A5878;
-              border:1.5px solid rgba(26,22,48,0.1);
-              box-shadow:0 2px 8px rgba(26,22,48,0.08);
-              transition:all 0.25s; text-decoration:none;
-            }
-            .soc:hover {
-              background:#8B5CF6; color:white;
-              border-color:#8B5CF6; transform:translateY(-4px) rotate(-5deg);
-              box-shadow:0 8px 20px rgba(139,92,246,0.35);
-            }
-            @keyframes scroll-bounce {
-              0%,100%{ transform:translateY(0); opacity:0.5; }
-              50%{ transform:translateY(8px); opacity:1; }
-            }
-
-            /* Floating decorative shapes */
-            @keyframes shape-float {
-              0%,100%{ transform:translateY(0) rotate(0deg); }
-              33%{ transform:translateY(-14px) rotate(5deg); }
-              66%{ transform:translateY(-7px) rotate(-3deg); }
-            }
-          `}</style>
-
-          {/* Floating colored shapes — decorative */}
-          {[
-            { color:'#FF2D78', size:18, top:'12%', right:'28%', delay:'0s' },
-            { color:'#FFBD35', size:14, top:'22%', right:'20%', delay:'0.8s', shape:'square' },
-            { color:'#00C896', size:20, top:'65%', right:'35%', delay:'1.5s' },
-            { color:'#0EA5E9', size:12, top:'42%', right:'22%', delay:'0.4s', shape:'square' },
-            { color:'#8B5CF6', size:16, top:'78%', right:'28%', delay:'1.1s' },
-            { color:'#FF6B35', size:22, top:'30%', right:'42%', delay:'0.6s', shape:'square' },
-          ].map((s, i) => (
-            <div key={i} style={{
-              position:'absolute', top:s.top, right:s.right,
-              width:s.size, height:s.size,
-              borderRadius: s.shape === 'square' ? '4px' : '50%',
-              background:s.color, opacity:0.5,
-              zIndex:2, pointerEvents:'none',
-              animation:`shape-float ${3 + i * 0.5}s ease-in-out infinite`,
-              animationDelay:s.delay,
-            }} />
-          ))}
 
           {/* Available badge */}
           <div className="hl" style={{
@@ -244,8 +176,7 @@ export default function Hero() {
           <h1 className="hl" style={{
             fontSize:'clamp(3.2rem, 8.5vw, 7rem)',
             fontWeight:900, lineHeight:0.95,
-            letterSpacing:'-4px', color:'#1A1630',
-            marginBottom:'8px',
+            letterSpacing:'-4px', color:'#1A1630', marginBottom:'8px',
           }}>
             Lynda
           </h1>
@@ -281,8 +212,7 @@ export default function Hero() {
           {/* Description */}
           <p className="hl" style={{
             fontSize:'1.1rem', color:'#5A5878',
-            maxWidth:'500px', lineHeight:1.8,
-            marginBottom:'40px',
+            maxWidth:'500px', lineHeight:1.8, marginBottom:'40px',
           }}>
             5+ ans à construire des apps web, des mondes en 3D et des jeux.
             {' '}<strong style={{ color:'#1A1630' }}>Full-time</strong> en entreprise
@@ -320,10 +250,8 @@ export default function Hero() {
               { n:'3', l:'domaines' },
             ].map(({ n, l }) => (
               <div key={l} style={{ textAlign:'center' }}>
-                <div style={{ fontFamily:"'JetBrains Mono',monospace", fontSize:'1.1rem',
-                  fontWeight:800, color:'#1A1630' }}>{n}</div>
-                <div style={{ fontFamily:"'JetBrains Mono',monospace", fontSize:'10px',
-                  color:'#9B99B0', letterSpacing:'1px' }}>{l}</div>
+                <div style={{ fontFamily:"'JetBrains Mono',monospace", fontSize:'1.1rem', fontWeight:800, color:'#1A1630' }}>{n}</div>
+                <div style={{ fontFamily:"'JetBrains Mono',monospace", fontSize:'10px', color:'#9B99B0', letterSpacing:'1px' }}>{l}</div>
               </div>
             ))}
           </div>
@@ -334,7 +262,7 @@ export default function Hero() {
       <div style={{
         position:'absolute', bottom:'32px', left:'50%',
         transform:'translateX(-50%)', zIndex:3,
-        display:'flex', flexDirection:'column', alignItems:'center', gap:'6px',
+        display:'flex', flexDirection:'column', alignItems:'center',
       }}>
         <div style={{
           width:'24px', height:'38px', borderRadius:'12px',

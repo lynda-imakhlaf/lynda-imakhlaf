@@ -45,7 +45,7 @@ export default function Skills() {
   return (
     <section id="skills" ref={ref} style={{
       padding:'100px 0', position:'relative', overflow:'hidden',
-      background:'#F6F4FF',
+      background:'transparent',
     }}>
 
       <style>{`
